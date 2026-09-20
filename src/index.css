@@ -1,0 +1,289 @@
+@import "tailwindcss";
+
+@import url("https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800;900&family=IBM+Plex+Mono:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,600&display=swap");
+
+:root {
+  color-scheme: dark;
+  --amber: #ffc474;
+  --amber-deep: #c17c2f;
+  --oak: #916e40;
+  --concrete: #22252c;
+  --concrete-2: #16181d;
+  --graphite: #0c0e12;
+  --text: #f8fafc;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+@layer base {
+  body {
+    font-family: 'Inter Tight', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    color: #f8fafc;
+    background-color: #0c0e12;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  code, pre, .font-mono {
+    font-family: 'IBM Plex Mono', 'JetBrains Mono', monospace;
+  }
+}
+
+.font-serif-cormorant {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  letter-spacing: -0.04em;
+}
+
+.font-sans-tight {
+  font-family: 'Inter Tight', 'Inter', sans-serif;
+}
+
+/* Film grain noise overlay for organic architectural texture */
+.grain {
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* Dark Architectural Drafting Grid (from regenerative-living-architecture) */
+.drafting-grid-dark {
+  background-image: 
+    linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+    repeating-linear-gradient(135deg, rgba(255, 255, 255, 0.02) 0 1px, transparent 1px 16px);
+  background-size: 128px 128px, 128px 128px, 240px 240px;
+}
+
+/* Openhero Amber Button */
+.amber-button {
+  position: relative;
+  overflow: hidden;
+  border-radius: 1rem;
+  background: linear-gradient(180deg, rgba(255, 196, 116, 0.98), rgba(193, 124, 47, 0.94));
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  color: #1a1005;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.5), 0 20px 45px rgba(0, 0, 0, 0.45);
+  transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.45s ease;
+  font-weight: 600;
+}
+
+.amber-button::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: 
+    radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.25), transparent 35%),
+    linear-gradient(120deg, transparent 44%, rgba(255, 255, 255, 0.7) 50%, transparent 56%);
+  transform: translateX(-140%) rotate(12deg);
+  animation: amberSheen 8s ease-in-out infinite;
+  pointer-events: none;
+  mix-blend-mode: screen;
+}
+
+@keyframes amberSheen {
+  0%, 25% {
+    transform: translateX(-140%) rotate(12deg);
+  }
+  50%, 100% {
+    transform: translateX(160%) rotate(12deg);
+  }
+}
+
+.amber-button:hover {
+  transform: translateY(-2px);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.6), 0 28px 60px rgba(0, 0, 0, 0.55);
+}
+
+/* Openhero Dense Frosted Glass Panel */
+.dense-panel {
+  background: 
+    linear-gradient(180deg, rgba(255, 255, 255, 0.055), rgba(255, 255, 255, 0.02)),
+    linear-gradient(135deg, rgba(255, 255, 255, 0.04), transparent 35%);
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06), 0 24px 70px rgba(0, 0, 0, 0.35);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+}
+
+/* Openhero Telemetry Card */
+.telemetry-card {
+  border-radius: 0.75rem;
+  border: 1px solid rgba(255, 195, 126, 0.28);
+  background: rgba(18, 20, 24, 0.68);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  box-shadow: 0 18px 48px rgba(0, 0, 0, 0.35);
+}
+
+/* Openhero Core Video Shimmer Frame */
+.shimmer-frame {
+  position: absolute;
+  inset: 0;
+  border-radius: 2rem;
+  pointer-events: none;
+  box-shadow: 
+    inset 0 0 0 1px rgba(255, 201, 118, 0.32),
+    inset 0 0 80px rgba(255, 196, 116, 0.22),
+    0 0 80px rgba(255, 178, 92, 0.12);
+}
+
+/* Material grain finishes */
+.grain-concrete {
+  background: 
+    linear-gradient(180deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.015)),
+    repeating-linear-gradient(90deg, rgba(255, 255, 255, 0.02) 0 1px, transparent 1px 10px),
+    linear-gradient(180deg, rgba(38, 40, 46, 0.85), rgba(18, 20, 24, 0.96));
+}
+
+.grain-oak {
+  background: 
+    linear-gradient(180deg, rgba(255, 255, 255, 0.04), rgba(255, 255, 255, 0.01)),
+    repeating-linear-gradient(90deg, rgba(145, 110, 64, 0.12) 0 1px, transparent 1px 8px),
+    linear-gradient(180deg, rgba(93, 66, 39, 0.75), rgba(42, 29, 18, 0.94));
+}
+
+.sunset-amber {
+  background: 
+    radial-gradient(circle at 20% 10%, rgba(255, 190, 112, 0.16), transparent 22%),
+    linear-gradient(180deg, rgba(134, 82, 40, 0.95), rgba(50, 30, 18, 0.98));
+}
+
+/* Architectural glassmorphism shell (Legacy support) */
+.shell {
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.75));
+  border: 1px solid rgba(226, 232, 240, 0.85);
+  backdrop-filter: blur(28px) saturate(1.18);
+  -webkit-backdrop-filter: blur(28px) saturate(1.18);
+  box-shadow: 0 20px 50px rgba(15, 23, 42, 0.06);
+}
+
+.shell-mist {
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0.85));
+  border: 1px solid rgba(203, 213, 225, 0.8);
+  backdrop-filter: blur(40px);
+  -webkit-backdrop-filter: blur(40px);
+  box-shadow: 0 24px 60px rgba(15, 23, 42, 0.07);
+}
+
+/* Portal mask for architectural video & canvas in light exposure */
+.portal-shell-light {
+  -webkit-mask-image:
+    radial-gradient(ellipse 90% 75% at 50% 35%, black 20%, rgba(0, 0, 0, 0.85) 55%, transparent 80%);
+  mask-image:
+    radial-gradient(ellipse 90% 75% at 50% 35%, black 20%, rgba(0, 0, 0, 0.85) 55%, transparent 80%);
+  will-change: transform;
+}
+
+.portal-frame-sunlit {
+  mask-image: linear-gradient(to bottom, black 65%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to bottom, black 65%, transparent 100%);
+}
+
+.squircle {
+  border-radius: 1.5rem;
+}
+
+/* Portal mask for architectural video & canvas */
+.portal-shell {
+  -webkit-mask-image:
+    radial-gradient(circle at 50% 44%, black 0 30%, rgba(0, 0, 0, .96) 38%, rgba(0, 0, 0, .7) 56%, transparent 75%),
+    radial-gradient(circle at 18% 18%, rgba(0, 0, 0, .9) 0 8%, transparent 26%),
+    radial-gradient(circle at 82% 20%, rgba(0, 0, 0, .9) 0 10%, transparent 26%),
+    radial-gradient(circle at 50% 82%, rgba(0, 0, 0, .82) 0 12%, transparent 30%);
+  mask-image:
+    radial-gradient(circle at 50% 44%, black 0 30%, rgba(0, 0, 0, .96) 38%, rgba(0, 0, 0, .7) 56%, transparent 75%),
+    radial-gradient(circle at 18% 18%, rgba(0, 0, 0, .9) 0 8%, transparent 26%),
+    radial-gradient(circle at 82% 20%, rgba(0, 0, 0, .9) 0 10%, transparent 26%),
+    radial-gradient(circle at 50% 82%, rgba(0, 0, 0, .82) 0 12%, transparent 30%);
+  -webkit-mask-composite: source-over;
+  mask-composite: add;
+  will-change: transform;
+}
+
+.fade-mask {
+  -webkit-mask-image: linear-gradient(to bottom, black 72%, transparent 100%);
+  mask-image: linear-gradient(to bottom, black 72%, transparent 100%);
+}
+
+.lift {
+  transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.45s ease, border-color 0.35s ease;
+}
+
+.lift:hover {
+  transform: translateY(-5px);
+  border-color: rgba(255, 255, 255, 0.28);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+}
+
+.bloom {
+  opacity: 0;
+  transform: translateY(24px) scale(0.98);
+}
+
+.bloom.in {
+  animation: bloom 0.9s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.wind {
+  display: inline-block;
+  animation: wind 10s ease-in-out infinite;
+  transform-origin: center bottom;
+}
+
+@keyframes sheen {
+  0%, 15% {
+    transform: translateX(-140%) rotate(12deg);
+  }
+  45%, 100% {
+    transform: translateX(180%) rotate(12deg);
+  }
+}
+
+@keyframes bloom {
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes wind {
+  0%, 100% {
+    transform: rotate(-0.8deg) translateX(-1px);
+  }
+  50% {
+    transform: rotate(0.8deg) translateX(1px);
+  }
+}
+
+@keyframes pulseSlow {
+  0%, 100% {
+    opacity: 0.4;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.8;
+    transform: scale(1.04);
+  }
+}
+
+.animate-pulse-slow {
+  animation: pulseSlow 5s ease-in-out infinite;
+}
+
+/* Custom technical scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: #d4d4d8;
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #a1a1aa;
+}
+
