@@ -60,6 +60,21 @@ export const LandingHero: React.FC<LandingHeroProps> = ({
           THEME: WARM INDUSTRIAL AMBER & HIGH-VIS ORANGE
       ═══════════════════════════════════════════════════════════════ */}
       <section id="hero" className="relative w-full pt-8 sm:pt-14 pb-16 overflow-hidden">
+        {/* Lưới mảnh màu xanh xám tạo bằng CSS linear-gradient */}
+        <div 
+          className="absolute inset-0 pointer-events-none z-0"
+          style={{
+            backgroundImage: `
+              linear-gradient(to right, rgba(45, 95, 148, 0.42) 1px, transparent 1px),
+              linear-gradient(to bottom, rgba(45, 95, 148, 0.42) 1px, transparent 1px)
+            `,
+            backgroundSize: '48px 48px',
+            backgroundPosition: 'center center',
+            maskImage: 'linear-gradient(to bottom, black 85%, transparent 100%)',
+            WebkitMaskImage: 'linear-gradient(to bottom, black 85%, transparent 100%)'
+          }}
+        />
+
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
           
