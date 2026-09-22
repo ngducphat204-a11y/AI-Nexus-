@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { LandingHeader } from './components/landing/LandingHeader';
 import { LandingHero } from './components/landing/LandingHero';
-import { LandingStorytelling } from './components/landing/LandingStorytelling';
 import { LandingFooter } from './components/landing/LandingFooter';
 
 import { AppShell, WorkspaceTab } from './components/workspace/AppShell';
@@ -297,17 +296,13 @@ export function App() {
   // ─────────────────────────────────────────────────────────────────
   if (viewMode === 'landing') {
     return (
-      <div className="min-h-screen bg-[#0c0e12] text-white font-sans selection:bg-[#ffc474]/30 selection:text-[#ffc474]">
+      <div className="min-h-screen bg-[#080d18] text-white font-sans selection:bg-[#f59e0b] selection:text-[#080d18]">
         <LandingHeader
           onGetStarted={handleGetStarted}
           onExploreDemo={handleExploreDemo}
           onLogin={handleLogin}
         />
         <LandingHero
-          onGetStarted={handleGetStarted}
-          onExploreDemo={handleExploreDemo}
-        />
-        <LandingStorytelling
           onGetStarted={handleGetStarted}
           onExploreDemo={handleExploreDemo}
         />

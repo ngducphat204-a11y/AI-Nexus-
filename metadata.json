@@ -1,6 +1,6 @@
 {
-  "name": "AI Paint Take-off",
-  "description": "Phần mềm kỹ thuật chuyên nghiệp bóc tách khối lượng bản vẽ xây dựng 2D, phân tích hình học và lập dự toán sơn có kiểm định.",
+  "name": "PlanAI - Xây dựng thông minh hơn",
+  "description": "Phân tích bản vẽ mặt bằng ngay lập tức bằng AI. Bóc tách khối lượng tự động từ bản vẽ PDF chỉ trong 30 giây với FloorScan AI.",
   "requestFramePermissions": [],
   "majorCapabilities": [
     "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
