@@ -74,6 +74,9 @@ export interface ProjectInfo {
   totalCost: number;
   avgConfidence: number;
   issuesCount: number;
+  drawingsCount?: number;
+  progressPct?: number;
+  floorsInfo?: string;
 }
 
 export interface CalculationRules {

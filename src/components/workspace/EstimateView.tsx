@@ -9,7 +9,8 @@ import {
   Download, 
   ChevronDown, 
   Check,
-  Edit2
+  Edit2,
+  ArrowLeft
 } from 'lucide-react';
 import { RoomEntity, CalculationRules, EstimateVersion } from '../../types';
 
@@ -22,6 +23,7 @@ interface EstimateViewProps {
   onOpenRules: () => void;
   onApproveEstimate: () => void;
   onExport: () => void;
+  onBackToTakeoff?: () => void;
 }
 
 export const EstimateView: React.FC<EstimateViewProps> = ({
@@ -33,6 +35,7 @@ export const EstimateView: React.FC<EstimateViewProps> = ({
   onOpenRules,
   onApproveEstimate,
   onExport,
+  onBackToTakeoff,
 }) => {
   const [selectedVersion, setSelectedVersion] = useState('v3');
   const [editingRoomId, setEditingRoomId] = useState<string | null>(null);
@@ -54,24 +57,25 @@ export const EstimateView: React.FC<EstimateViewProps> = ({
   return (
     <div className="h-full overflow-y-auto p-6 md:p-8 max-w-7xl mx-auto space-y-6 text-white">
       {/* Top Header & Versioning Bar */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-white/10">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-amber-500/20">
         <div>
           <div className="flex items-center gap-2 mb-1.5">
-            <span className="text-[11px] font-mono font-semibold uppercase tracking-widest text-[#ffc474]">
-              03 // TIÊN LƯỢNG DỰ TOÁN & CHI PHÍ THI CÔNG
+            <span className="px-2.5 py-1 rounded-full text-[10px] font-mono font-extrabold uppercase tracking-wider bg-[#161a26] text-[#fbbf24] border border-amber-500/50 shadow-[0_0_12px_rgba(245,158,11,0.2)]">
+              BƯỚC 4 / 4 • DỰ TOÁN SƠN & CHI PHÍ THI CÔNG
             </span>
+            <span className="text-xs text-amber-200/50 font-mono">• BOQ & PRICING</span>
           </div>
           <div className="flex flex-wrap items-center gap-3">
-            <h1 className="font-serif-cormorant text-2xl sm:text-3xl font-semibold text-white tracking-tight">
-              Bảng Bóc tách Khối lượng & Dự toán Sơn
+            <h1 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">
+              Bảng Bóc Tách Khối Lượng & Dự Toán Sơn
             </h1>
             {/* Version Switcher */}
-            <div className="flex items-center gap-1.5 bg-[#161822] p-1 rounded-xl border border-white/10 text-xs font-mono">
+            <div className="flex items-center gap-1.5 bg-[#0e1424] p-1 rounded-xl border border-amber-500/30 text-xs font-mono">
               <span className="text-white/40 pl-2">Phiên bản:</span>
               <select
                 value={selectedVersion}
                 onChange={(e) => setSelectedVersion(e.target.value)}
-                className="bg-[#12141a] border border-white/15 rounded-lg px-2.5 py-1 font-bold text-white focus:outline-none cursor-pointer"
+                className="bg-[#080d18] border border-amber-500/30 rounded-lg px-2.5 py-1 font-bold text-[#fbbf24] focus:outline-none cursor-pointer"
               >
                 {versions.map((v) => (
                   <option key={v.version} value={v.version}>
@@ -81,24 +85,35 @@ export const EstimateView: React.FC<EstimateViewProps> = ({
               </select>
             </div>
           </div>
-          <p className="text-sm text-white/60 mt-1 max-w-3xl font-sans-tight">
-            Bảng tiên lượng dự toán (BoQ) minh bạch được tổng hợp trực tiếp từ hình học vector phòng CAD đã thẩm định và quy tắc khấu trừ chuẩn.
+          <p className="text-xs sm:text-sm text-white/65 mt-1 max-w-3xl">
+            Bảng tiên lượng dự toán (BoQ) minh bạch được tổng hợp trực tiếp từ diện tích hình học phòng CAD đã thẩm định ở Bước 3 và định mức vật tư sơn.
           </p>
         </div>
 
         {/* Right Actions */}
         <div className="flex flex-wrap items-center gap-2">
+          {onBackToTakeoff && (
+            <button
+              onClick={onBackToTakeoff}
+              className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl border border-white/10 bg-white/5 hover:bg-amber-500/10 hover:border-amber-500/40 text-white text-xs font-semibold transition-all cursor-pointer"
+              title="Quay lại Bảng khối lượng hình học (Bước 3)"
+            >
+              <ArrowLeft className="w-3.5 h-3.5" />
+              <span>Bảng khối lượng</span>
+            </button>
+          )}
+
           <button
             onClick={onOpenRules}
-            className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl border border-white/10 bg-white/5 hover:bg-white/10 text-white text-xs font-semibold transition-colors cursor-pointer"
+            className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl border border-white/10 bg-white/5 hover:bg-amber-500/10 hover:border-amber-500/40 text-white text-xs font-semibold transition-all cursor-pointer"
           >
-            <Sliders className="w-3.5 h-3.5 text-[#ffc474]" />
+            <Sliders className="w-3.5 h-3.5 text-[#fbbf24]" />
             <span>Quy tắc tính toán</span>
           </button>
 
           <button
             onClick={onApproveEstimate}
-            className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-semibold shadow-xs transition-all active:scale-98 cursor-pointer"
+            className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold shadow-sm transition-all active:scale-98 cursor-pointer"
           >
             <CheckCircle2 className="w-4 h-4" />
             <span>Phê duyệt Dự toán</span>
@@ -106,9 +121,9 @@ export const EstimateView: React.FC<EstimateViewProps> = ({
 
           <button
             onClick={onExport}
-            className="amber-button inline-flex items-center gap-1.5 px-4 py-2 text-xs font-semibold shadow-xs transition-all active:scale-98 cursor-pointer"
+            className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-gradient-to-r from-[#fbbf24] via-[#f59e0b] to-[#ea580c] hover:brightness-110 text-[#080d18] text-xs font-extrabold shadow-[0_4px_20px_rgba(245,158,11,0.45)] transition-all active:scale-98 cursor-pointer"
           >
-            <Download className="w-4 h-4" />
+            <Download className="w-4 h-4 stroke-[2.5]" />
             <span>Xuất báo cáo</span>
           </button>
         </div>
@@ -116,7 +131,7 @@ export const EstimateView: React.FC<EstimateViewProps> = ({
 
       {/* Top High-Contrast KPI Cards */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-        <div className="p-5 rounded-2xl border border-white/10 bg-[#161822] shadow-sm">
+        <div className="p-5 rounded-2xl border border-white/10 hover:border-amber-500/30 transition-colors bg-[#0e1424] shadow-sm">
           <div className="text-[11px] font-mono text-white/50 font-semibold uppercase">TỔNG DIỆN TÍCH SƠN</div>
           <div className="text-3xl font-extrabold text-white font-mono mt-2">
             {totalPaintArea.toLocaleString()} <span className="text-sm font-normal text-white/40">m²</span>
@@ -126,17 +141,17 @@ export const EstimateView: React.FC<EstimateViewProps> = ({
           </div>
         </div>
 
-        <div className="p-5 rounded-2xl border border-white/10 bg-[#161822] shadow-sm">
-          <div className="text-[11px] font-mono text-white/50 font-semibold uppercase">DỰ TOÁN KINH PHÍ</div>
-          <div className="text-3xl font-extrabold text-[#ffc474] font-mono mt-2">
-            {totalCost.toLocaleString()} <span className="text-sm font-normal text-white/40">₫</span>
+        <div className="p-5 rounded-2xl border border-amber-500/60 bg-[#161a26] shadow-[0_0_20px_rgba(245,158,11,0.18)]">
+          <div className="text-[11px] font-mono text-[#fbbf24] font-semibold uppercase">DỰ TOÁN KINH PHÍ</div>
+          <div className="text-3xl font-black text-[#fbbf24] font-mono mt-2">
+            {totalCost.toLocaleString()} <span className="text-sm font-normal text-amber-200/60">₫</span>
           </div>
-          <div className="text-xs text-white/40 mt-2 font-mono">
+          <div className="text-xs text-[#fbbf24]/80 mt-2 font-mono font-medium">
             Bình quân: {Math.round(totalCost / totalPaintArea).toLocaleString()} ₫/m²
           </div>
         </div>
 
-        <div className="p-5 rounded-2xl border border-white/10 bg-[#161822] shadow-sm">
+        <div className="p-5 rounded-2xl border border-white/10 hover:border-amber-500/30 transition-colors bg-[#0e1424] shadow-sm">
           <div className="text-[11px] font-mono text-white/50 font-semibold uppercase">HỆ SƠN NỘI THẤT</div>
           <div className="text-3xl font-extrabold text-white font-mono mt-2">
             {interiorArea.toLocaleString()} <span className="text-sm font-normal text-white/40">m²</span>
@@ -146,7 +161,7 @@ export const EstimateView: React.FC<EstimateViewProps> = ({
           </div>
         </div>
 
-        <div className="p-5 rounded-2xl border border-white/10 bg-[#161822] shadow-sm">
+        <div className="p-5 rounded-2xl border border-white/10 hover:border-amber-500/30 transition-colors bg-[#0e1424] shadow-sm">
           <div className="text-[11px] font-mono text-white/50 font-semibold uppercase">NGOẠI THẤT & HỘP KT</div>
           <div className="text-3xl font-extrabold text-white font-mono mt-2">
             {exteriorArea.toLocaleString()} <span className="text-sm font-normal text-white/40">m²</span>
@@ -158,19 +173,19 @@ export const EstimateView: React.FC<EstimateViewProps> = ({
       </div>
 
       {/* Main Engineering Take-off Table */}
-      <div className="bg-[#12141a] border border-white/10 rounded-2xl overflow-hidden shadow-xl">
-        <div className="px-6 py-4 bg-[#161822]/80 border-b border-white/10 flex items-center justify-between">
-          <span className="text-xs font-mono font-bold text-white/80 uppercase">
-            BẢNG TIÊN LƯỢNG BÓC TÁCH CHI TIẾT TỪNG PHÒNG // NHẤP NGUỒN ĐỂ XEM CAD
+      <div className="bg-[#0e1424] border border-white/10 rounded-2xl overflow-hidden shadow-xl">
+        <div className="px-6 py-4 bg-[#111728] border-b border-amber-500/20 flex items-center justify-between">
+          <span className="text-xs font-mono font-bold text-white/90 uppercase">
+            BẢNG TIÊN LƯỢNG BÓC TÁCH CHI TIẾT TỪNG PHÒNG • NHẤP NGUỒN ĐỂ XEM CAD
           </span>
-          <span className="text-xs font-mono text-white/40">
+          <span className="text-xs font-mono text-amber-200/50">
             Quy chuẩn: Cao {rules.defaultWallHeight}m · Hao hụt {rules.wasteFactorPct}%
           </span>
         </div>
 
         <div className="overflow-x-auto">
           <table className="w-full text-left text-xs font-mono">
-            <thead className="bg-[#161822] border-b border-white/10 text-white/50 uppercase text-[10px]">
+            <thead className="bg-[#0a0f1d] border-b border-white/10 text-white/50 uppercase text-[10px]">
               <tr>
                 <th className="px-4 py-3">Mã phòng</th>
                 <th className="px-4 py-3">Nguồn CAD</th>
@@ -185,22 +200,22 @@ export const EstimateView: React.FC<EstimateViewProps> = ({
                 <th className="px-4 py-3 text-right">Xem CAD</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-white/10 text-white/80">
+            <tbody className="divide-y divide-white/5 text-white/80">
               {rooms.map((room) => {
                 const isEditing = editingRoomId === room.id;
                 const isConfirmed = room.status === 'Confirmed';
                 const isNeedsReview = room.status === 'Needs Review';
 
                 return (
-                  <tr key={room.id} className="hover:bg-white/5 transition-colors">
+                  <tr key={room.id} className="hover:bg-amber-500/5 transition-colors">
                     <td className="px-4 py-3 font-bold text-white">
-                      <div className="text-[#ffc474]">{room.code}</div>
+                      <div className="text-[#fbbf24]">{room.code}</div>
                       <div className="text-[10px] text-white/40 font-sans font-normal truncate max-w-[140px]">
                         {room.name}
                       </div>
                     </td>
 
-                    <td className="px-4 py-3 text-sky-400 font-semibold">
+                    <td className="px-4 py-3 text-amber-400 font-semibold">
                       <button
                         onClick={() => onJumpToCad(room.id)}
                         className="hover:underline flex items-center gap-1 text-left cursor-pointer"
@@ -217,7 +232,7 @@ export const EstimateView: React.FC<EstimateViewProps> = ({
                       -{(room.doorDeductions + room.windowDeductions).toFixed(2)} m²
                     </td>
 
-                    <td className="px-4 py-3 font-bold text-[#ffc474]">
+                    <td className="px-4 py-3 font-bold text-[#fbbf24]">
                       {room.netPaintArea.toFixed(2)} m²
                     </td>
 
@@ -228,13 +243,13 @@ export const EstimateView: React.FC<EstimateViewProps> = ({
                             type="number"
                             value={tempRate}
                             onChange={(e) => setTempRate(parseInt(e.target.value) || 0)}
-                            className="w-20 px-1 py-0.5 border border-white/30 rounded text-right bg-[#161822] text-xs font-mono text-white"
+                            className="w-20 px-1 py-0.5 border border-amber-500/40 rounded text-right bg-[#080d18] text-xs font-mono text-white focus:outline-none focus:border-amber-400"
                           />
                           <button
                             onClick={() => handleSaveRate(room.id)}
                             className="p-1 text-emerald-400 hover:bg-white/10 rounded cursor-pointer"
                           >
-                            <Check className="w-3.5 h-3.5" />
+                            <Check className="w-3.5 h-3.5 stroke-[2.5]" />
                           </button>
                         </div>
                       ) : (
@@ -243,7 +258,7 @@ export const EstimateView: React.FC<EstimateViewProps> = ({
                             setEditingRoomId(room.id);
                             setTempRate(room.unitRate);
                           }}
-                          className="flex items-center gap-1 hover:text-[#ffc474] group cursor-pointer text-white"
+                          className="flex items-center gap-1 hover:text-[#fbbf24] group cursor-pointer text-white"
                           title="Nhấp để sửa đơn giá"
                         >
                           <span>{room.unitRate.toLocaleString()} ₫</span>
@@ -260,10 +275,10 @@ export const EstimateView: React.FC<EstimateViewProps> = ({
                       <span
                         className={`px-2 py-0.5 rounded text-[10px] font-bold ${
                           isNeedsReview
-                            ? 'bg-amber-500/20 text-[#ffc474] border border-amber-500/40'
+                            ? 'bg-amber-500/20 text-[#fbbf24] border border-amber-500/40'
                             : isConfirmed
                             ? 'bg-emerald-500/20 text-emerald-400 border border-emerald-500/40'
-                            : 'bg-sky-500/20 text-sky-400 border border-sky-500/40'
+                            : 'bg-amber-500/10 text-amber-300 border border-amber-500/30'
                         }`}
                       >
                         {room.status === 'Confirmed'
@@ -281,10 +296,10 @@ export const EstimateView: React.FC<EstimateViewProps> = ({
                     <td className="px-4 py-3 text-right">
                       <button
                         onClick={() => onJumpToCad(room.id)}
-                        className="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-white/5 hover:bg-[#ffc474] hover:text-black border border-white/10 text-white text-[11px] font-semibold transition-all cursor-pointer"
+                        className="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-amber-500/10 hover:bg-amber-500/20 border border-amber-500/40 text-[#fbbf24] text-[11px] font-semibold transition-all cursor-pointer"
                       >
                         <span>Xem CAD</span>
-                        <ExternalLink className="w-3 h-3 text-sky-400" />
+                        <ExternalLink className="w-3 h-3 text-[#fbbf24]" />
                       </button>
                     </td>
                   </tr>

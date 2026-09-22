@@ -15,6 +15,8 @@ import { GeometryEditorModal } from './components/workspace/GeometryEditorModal'
 import { CalculationRulesModal } from './components/workspace/CalculationRulesModal';
 import { AuditTrailModal } from './components/workspace/AuditTrailModal';
 import { ExportModal } from './components/workspace/ExportModal';
+import { CreateProjectView } from './components/workspace/CreateProjectView';
+import { AIVerificationCenterView } from './components/workspace/AIVerificationCenterView';
 
 import { 
   INITIAL_ROOMS, 
@@ -30,10 +32,10 @@ import { CheckCircle2, RotateCcw, X, GitBranch } from 'lucide-react';
 
 export function App() {
   // Navigation Mode: 'landing' (Public Storytelling) or 'app' (Authenticated Workspace)
-  const [viewMode, setViewMode] = useState<'landing' | 'app'>('landing');
+  const [viewMode, setViewMode] = useState<'landing' | 'app'>('app');
 
-  // Application Workspace Tab
-  const [currentTab, setCurrentTab] = useState<WorkspaceTab>('drawing-review');
+  // Application Workspace Tab (matches redesigned user workflow)
+  const [currentTab, setCurrentTab] = useState<WorkspaceTab>('create-project');
 
   // Domain State
   const [projects, setProjects] = useState<ProjectInfo[]>(MOCK_PROJECTS);
@@ -84,7 +86,7 @@ export function App() {
   // Handlers for Landing
   const handleGetStarted = () => {
     setViewMode('app');
-    setIsProjectSetupOpen(true);
+    setCurrentTab('create-project');
   };
 
   const handleExploreDemo = () => {
@@ -95,7 +97,7 @@ export function App() {
 
   const handleLogin = () => {
     setViewMode('app');
-    setCurrentTab('dashboard');
+    setCurrentTab('create-project');
   };
 
   // Handlers for Project Setup & AI Analysis
@@ -354,7 +356,7 @@ export function App() {
             setActiveProject(proj);
             setCurrentTab('drawing-review');
           }}
-          onCreateProject={() => setIsProjectSetupOpen(true)}
+          onCreateProject={() => setCurrentTab('create-project')}
           onOpenDrawingReview={(proj) => {
             setActiveProject(proj);
             setCurrentTab('drawing-review');
@@ -362,34 +364,43 @@ export function App() {
         />
       )}
 
-      {currentTab === 'drawing-review' && (
-        <div className="flex h-full w-full overflow-hidden">
-          {/* Main Dark CAD Canvas */}
-          <div className="flex-1 h-full relative">
-            <DrawingCanvas
-              rooms={rooms}
-              doors={doors}
-              layers={layers}
-              selectedRoomId={selectedRoomId}
-              highlightedSourceHandle={highlightedSourceHandle}
-              onSelectRoom={handleSelectRoom}
-              onConfirmRoom={handleConfirmRoom}
-              onRejectRoom={handleRejectRoom}
-              onEditBoundary={handleCorrectRoom}
-              onToggleLayer={handleToggleLayer}
-            />
-          </div>
+      {currentTab === 'create-project' && (
+        <CreateProjectView
+          onCancel={() => setCurrentTab('dashboard')}
+          onProceed={(data) => {
+            setRules((prev) => ({
+              ...prev,
+              defaultWallHeight: data.wallHeight,
+              deductDoors: data.deductions.includes('Trừ cửa đi'),
+              deductWindows: data.deductions.includes('Trừ cửa sổ'),
+            }));
+            addAuditEvent(
+              'Tạo Dự án Mới',
+              data.name,
+              `Đã tải lên file ${data.fileName}, cấu hình chiều cao tường ${data.wallHeight}m, phạm vi bóc tách: ${data.paintScope.join(', ')}.`
+            );
+            handleStartAnalysis(data.name, 'Tòa nhà văn phòng A', data.floor, data.fileName);
+          }}
+          onSaveDraft={() => {
+            setInvalidationBanner('✓ Đã lưu nháp hồ sơ dự án thành công.');
+          }}
+          onNavigateToReview={() => {
+            setCurrentTab('drawing-review');
+          }}
+          onNavigateToEstimate={() => {
+            setCurrentTab('estimate');
+          }}
+        />
+      )}
 
-          {/* Right Inspector Panel */}
-          <InspectorPanel
-            room={selectedRoom}
-            onConfirm={handleConfirmRoom}
-            onCorrect={handleCorrectRoom}
-            onReject={handleRejectRoom}
-            onHighlightSource={handleHighlightSource}
-            onApplySuggestion={handleApplySuggestion}
-          />
-        </div>
+      {currentTab === 'drawing-review' && (
+        <AIVerificationCenterView
+          project={activeProject}
+          rooms={rooms}
+          onNavigateToTakeoff={() => setCurrentTab('review-queue')}
+          onBackToAnalysis={() => setIsAIProcessingOpen(true)}
+          onOpenAuditLog={() => setIsAuditModalOpen(true)}
+        />
       )}
 
       {currentTab === 'review-queue' && (
@@ -400,6 +411,8 @@ export function App() {
           onConfirmRoom={handleConfirmRoom}
           onCorrectRoom={handleCorrectRoom}
           onRejectRoom={handleRejectRoom}
+          onNavigateToEstimate={() => setCurrentTab('estimate')}
+          onBackToReview={() => setCurrentTab('drawing-review')}
         />
       )}
 
@@ -416,6 +429,7 @@ export function App() {
             addAuditEvent('Phê duyệt Dự toán', activeProject.name, 'Đã phê duyệt bản bóc tách v3. Tổng kinh phí: 1.284.500.000 ₫.');
           }}
           onExport={() => setIsExportModalOpen(true)}
+          onBackToTakeoff={() => setCurrentTab('review-queue')}
         />
       )}
 
