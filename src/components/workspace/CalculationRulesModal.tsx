@@ -31,7 +31,7 @@ export const CalculationRulesModal: React.FC<CalculationRulesModalProps> = ({
         <div className="px-6 py-4 border-b border-white/10 flex items-center justify-between bg-[#161822]">
           <div>
             <h2 className="text-base font-bold text-white flex items-center gap-2">
-              <Sliders className="w-4 h-4 text-[#ffc474]" />
+              <Sliders className="w-4 h-4 text-sky-400" />
               Quy tắc Tính toán & Tái tính Dự toán Sơn
             </h2>
             <p className="text-xs text-white/50 font-mono">
@@ -58,7 +58,7 @@ export const CalculationRulesModal: React.FC<CalculationRulesModalProps> = ({
                 onChange={(e) =>
                   setFormData({ ...formData, defaultWallHeight: parseFloat(e.target.value) || 3.2 })
                 }
-                className="w-full px-3 py-2 rounded-lg border border-white/10 bg-white/5 text-white focus:outline-none focus:border-[#ffc474]/50"
+                className="w-full px-3 py-2 rounded-lg border border-white/10 bg-white/5 text-white focus:outline-none focus:border-sky-400"
               />
             </div>
 
@@ -70,13 +70,13 @@ export const CalculationRulesModal: React.FC<CalculationRulesModalProps> = ({
                 onChange={(e) =>
                   setFormData({ ...formData, wasteFactorPct: parseInt(e.target.value) || 5 })
                 }
-                className="w-full px-3 py-2 rounded-lg border border-white/10 bg-white/5 text-white focus:outline-none focus:border-[#ffc474]/50"
+                className="w-full px-3 py-2 rounded-lg border border-white/10 bg-white/5 text-white focus:outline-none focus:border-sky-400"
               />
             </div>
           </div>
 
           <div className="pt-2 border-t border-white/10 space-y-3">
-            <span className="font-bold text-[#ffc474] block uppercase">
+            <span className="font-bold text-sky-400 block uppercase">
               Khấu trừ Hình học Không gian
             </span>
 
@@ -91,7 +91,7 @@ export const CalculationRulesModal: React.FC<CalculationRulesModalProps> = ({
                 type="checkbox"
                 checked={formData.deductDoors}
                 onChange={(e) => setFormData({ ...formData, deductDoors: e.target.checked })}
-                className="w-4 h-4 rounded bg-white/10 border-white/20 text-[#ffc474] focus:ring-0 cursor-pointer"
+                className="w-4 h-4 rounded bg-white/10 border-white/20 text-sky-500 focus:ring-0 cursor-pointer"
               />
             </label>
 
@@ -106,7 +106,7 @@ export const CalculationRulesModal: React.FC<CalculationRulesModalProps> = ({
                 type="checkbox"
                 checked={formData.deductWindows}
                 onChange={(e) => setFormData({ ...formData, deductWindows: e.target.checked })}
-                className="w-4 h-4 rounded bg-white/10 border-white/20 text-[#ffc474] focus:ring-0 cursor-pointer"
+                className="w-4 h-4 rounded bg-white/10 border-white/20 text-sky-500 focus:ring-0 cursor-pointer"
               />
             </label>
           </div>
@@ -120,7 +120,7 @@ export const CalculationRulesModal: React.FC<CalculationRulesModalProps> = ({
                 onChange={(e) =>
                   setFormData({ ...formData, primerCoats: parseInt(e.target.value) || 1 })
                 }
-                className="w-full px-3 py-2 rounded-lg border border-white/10 bg-white/5 text-white focus:outline-none focus:border-[#ffc474]/50"
+                className="w-full px-3 py-2 rounded-lg border border-white/10 bg-white/5 text-white focus:outline-none focus:border-sky-400"
               />
             </div>
 
@@ -132,7 +132,7 @@ export const CalculationRulesModal: React.FC<CalculationRulesModalProps> = ({
                 onChange={(e) =>
                   setFormData({ ...formData, topCoats: parseInt(e.target.value) || 2 })
                 }
-                className="w-full px-3 py-2 rounded-lg border border-white/10 bg-white/5 text-white focus:outline-none focus:border-[#ffc474]/50"
+                className="w-full px-3 py-2 rounded-lg border border-white/10 bg-white/5 text-white focus:outline-none focus:border-sky-400"
               />
             </div>
           </div>
@@ -148,7 +148,7 @@ export const CalculationRulesModal: React.FC<CalculationRulesModalProps> = ({
             </button>
             <button
               type="submit"
-              className="amber-button inline-flex items-center gap-1.5 px-5 py-2.5 text-xs font-semibold shadow-xs transition-all active:scale-98 cursor-pointer"
+              className="inline-flex items-center gap-1.5 px-5 py-2.5 rounded-xl bg-sky-600 hover:bg-sky-500 text-white text-xs font-bold shadow-[0_2px_14px_rgba(2,132,199,0.35)] transition-all active:scale-98 cursor-pointer"
             >
               <Check className="w-4 h-4" />
               <span>Lưu & Tái tính toán</span>

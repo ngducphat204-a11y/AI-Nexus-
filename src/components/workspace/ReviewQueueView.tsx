@@ -109,20 +109,20 @@ export const ReviewQueueView: React.FC<ReviewQueueViewProps> = ({
       {/* ─────────────────────────────────────────────────────────────
           HEADER SECTION (STEP 3 CONTEXT & TITLE)
       ───────────────────────────────────────────────────────────── */}
-      <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4 pb-6 border-b border-amber-500/20">
+      <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4 pb-6 border-b border-sky-500/20">
         <div>
           <div className="flex items-center gap-2 mb-1.5">
-            <span className="px-2.5 py-1 rounded-full text-[10px] font-mono font-extrabold uppercase tracking-wider bg-[#161a26] text-[#fbbf24] border border-amber-500/50 shadow-[0_0_12px_rgba(245,158,11,0.2)]">
+            <span className="px-2.5 py-1 rounded-full text-[10px] font-mono font-extrabold uppercase tracking-wider bg-sky-500/10 text-sky-400 border border-sky-500/30 shadow-xs">
               BƯỚC 3 / 4 • BẢNG KHỐI LƯỢNG HÌNH HỌC
             </span>
-            <span className="text-xs text-amber-200/50 font-mono">• CAD TAKEOFF SHEET</span>
+            <span className="text-xs text-sky-300/60 font-mono">• CAD TAKEOFF SHEET</span>
           </div>
           <h1 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight flex items-center gap-3">
             Bảng Khối Lượng Bóc Tách Đo Đạc CAD
           </h1>
           <p className="text-xs sm:text-sm text-white/65 mt-1 max-w-3xl">
             Toàn bộ số liệu diện tích hình học (sàn, chu vi tường, chiều cao và diện tích trừ cửa) được đo bóc tự động từ bản vẽ vector CAD. 
-            <strong className="text-[#fbbf24] font-semibold ml-1">Chưa tính khối lượng sơn & chi phí</strong> (sẽ thực hiện ở Bước 4).
+            <strong className="text-sky-400 font-semibold ml-1">Chưa tính khối lượng sơn & chi phí</strong> (sẽ thực hiện ở Bước 4).
           </p>
         </div>
 
@@ -131,7 +131,7 @@ export const ReviewQueueView: React.FC<ReviewQueueViewProps> = ({
           {onBackToReview && (
             <button
               onClick={onBackToReview}
-              className="px-3.5 py-2 rounded-xl bg-white/5 hover:bg-amber-500/10 border border-white/10 hover:border-amber-500/40 text-xs font-semibold text-white/80 hover:text-white transition-all flex items-center gap-1.5 cursor-pointer shadow-sm"
+              className="px-3.5 py-2 rounded-xl bg-white/5 hover:bg-sky-500/10 border border-white/10 hover:border-sky-500/30 text-xs font-semibold text-white/80 hover:text-white transition-all flex items-center gap-1.5 cursor-pointer shadow-xs"
               title="Quay lại kiểm tra bản vẽ CAD"
             >
               <ArrowLeft className="w-3.5 h-3.5" />
@@ -141,7 +141,7 @@ export const ReviewQueueView: React.FC<ReviewQueueViewProps> = ({
 
           <button
             onClick={handleExportExcel}
-            className="px-3.5 py-2 rounded-xl bg-white/5 hover:bg-amber-500/10 border border-white/10 hover:border-amber-500/40 text-xs font-semibold text-white/80 hover:text-white transition-all flex items-center gap-1.5 cursor-pointer shadow-sm"
+            className="px-3.5 py-2 rounded-xl bg-white/5 hover:bg-sky-500/10 border border-white/10 hover:border-sky-500/30 text-xs font-semibold text-white/80 hover:text-white transition-all flex items-center gap-1.5 cursor-pointer shadow-xs"
             title="Xuất bảng khối lượng ra định dạng Excel / CSV"
           >
             <FileSpreadsheet className="w-3.5 h-3.5 text-emerald-400" />
@@ -151,7 +151,7 @@ export const ReviewQueueView: React.FC<ReviewQueueViewProps> = ({
           {onNavigateToEstimate && (
             <button
               onClick={onNavigateToEstimate}
-              className="px-4 py-2 rounded-xl bg-gradient-to-r from-[#fbbf24] via-[#f59e0b] to-[#ea580c] hover:brightness-110 active:scale-98 text-[#080d18] text-xs font-extrabold flex items-center gap-2 shadow-[0_4px_20px_rgba(245,158,11,0.45)] transition-all cursor-pointer"
+              className="px-4 py-2 rounded-xl bg-sky-600 hover:bg-sky-500 active:scale-98 text-white text-xs font-bold flex items-center gap-2 shadow-[0_2px_14px_rgba(2,132,199,0.35)] border border-sky-400/30 transition-all cursor-pointer"
               title="Chuyển sang bước 4 để chọn sơn và tính chi phí"
             >
               <span>Lập dự toán sơn (Bước 4)</span>
@@ -167,7 +167,7 @@ export const ReviewQueueView: React.FC<ReviewQueueViewProps> = ({
       <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3 sm:gap-4">
         
         {/* Card 1: Tổng diện tích sàn */}
-        <div className="p-4 rounded-2xl bg-[#0e1424] border border-white/10 hover:border-amber-500/30 transition-colors shadow-sm">
+        <div className="p-4 rounded-2xl bg-[#0e1424] border border-white/10 hover:border-sky-500/30 transition-colors shadow-sm">
           <div className="text-[11px] text-white/50 font-medium">Tổng diện tích sàn</div>
           <div className="text-xl font-bold font-mono text-white mt-1">
             {totalFloorArea.toFixed(1)} <span className="text-xs font-sans text-white/50 font-normal">m²</span>
@@ -176,16 +176,16 @@ export const ReviewQueueView: React.FC<ReviewQueueViewProps> = ({
         </div>
 
         {/* Card 2: Tổng chu vi tường */}
-        <div className="p-4 rounded-2xl bg-[#0e1424] border border-white/10 hover:border-amber-500/30 transition-colors shadow-sm">
+        <div className="p-4 rounded-2xl bg-[#0e1424] border border-white/10 hover:border-sky-500/30 transition-colors shadow-sm">
           <div className="text-[11px] text-white/50 font-medium">Tổng chu vi tường</div>
-          <div className="text-xl font-bold font-mono text-[#fbbf24] mt-1">
+          <div className="text-xl font-bold font-mono text-sky-400 mt-1">
             {totalPerimeter.toFixed(1)} <span className="text-xs font-sans text-white/50 font-normal">m</span>
           </div>
           <div className="text-[10px] text-white/40 mt-0.5">Đo theo tim/thông thủy</div>
         </div>
 
         {/* Card 3: Chiều cao thiết kế */}
-        <div className="p-4 rounded-2xl bg-[#0e1424] border border-white/10 hover:border-amber-500/30 transition-colors shadow-sm">
+        <div className="p-4 rounded-2xl bg-[#0e1424] border border-white/10 hover:border-sky-500/30 transition-colors shadow-sm">
           <div className="text-[11px] text-white/50 font-medium">Chiều cao tầng (H)</div>
           <div className="text-xl font-bold font-mono text-white mt-1">
             {standardHeight.toFixed(1)} <span className="text-xs font-sans text-white/50 font-normal">m</span>
@@ -194,16 +194,16 @@ export const ReviewQueueView: React.FC<ReviewQueueViewProps> = ({
         </div>
 
         {/* Card 4: Khấu trừ cửa */}
-        <div className="p-4 rounded-2xl bg-[#0e1424] border border-white/10 hover:border-amber-500/30 transition-colors shadow-sm">
+        <div className="p-4 rounded-2xl bg-[#0e1424] border border-white/10 hover:border-sky-500/30 transition-colors shadow-sm">
           <div className="text-[11px] text-white/50 font-medium">Khấu trừ cửa & lỗ mở</div>
-          <div className="text-xl font-bold font-mono text-amber-400 mt-1">
+          <div className="text-xl font-bold font-mono text-rose-400 mt-1">
             -{totalDeduction.toFixed(1)} <span className="text-xs font-sans text-white/50 font-normal">m²</span>
           </div>
           <div className="text-[10px] text-white/40 mt-0.5">8 cửa đi + 15 cửa sổ</div>
         </div>
 
         {/* Card 5: Diện tích tường Net */}
-        <div className="p-4 rounded-2xl bg-[#0e1424] border border-white/10 hover:border-amber-500/30 transition-colors shadow-sm">
+        <div className="p-4 rounded-2xl bg-[#0e1424] border border-white/10 hover:border-sky-500/30 transition-colors shadow-sm">
           <div className="text-[11px] text-emerald-400 font-semibold">Diện tích tường Net</div>
           <div className="text-xl font-bold font-mono text-emerald-400 mt-1">
             {totalNetWallArea.toFixed(1)} <span className="text-xs font-sans text-white/50 font-normal">m²</span>
@@ -212,12 +212,12 @@ export const ReviewQueueView: React.FC<ReviewQueueViewProps> = ({
         </div>
 
         {/* Card 6: Tổng DT bóc tách (Tường + Trần) */}
-        <div className="p-4 rounded-2xl bg-[#161a26] border border-amber-500/60 shadow-[0_0_20px_rgba(245,158,11,0.18)]">
-          <div className="text-[11px] text-[#fbbf24] font-bold">Tổng DT Bề mặt</div>
+        <div className="p-4 rounded-2xl bg-[#0e1628] border border-sky-500/40 shadow-[0_0_20px_rgba(56,189,248,0.12)]">
+          <div className="text-[11px] text-sky-400 font-bold">Tổng DT Bề mặt</div>
           <div className="text-xl font-black font-mono text-white mt-1">
-            {totalTakeoffSurface.toFixed(1)} <span className="text-xs font-sans text-amber-200/70 font-normal">m²</span>
+            {totalTakeoffSurface.toFixed(1)} <span className="text-xs font-sans text-sky-200/70 font-normal">m²</span>
           </div>
-          <div className="text-[10px] text-[#fbbf24]/80 mt-0.5">Tường net + Trần sàn</div>
+          <div className="text-[10px] text-sky-300/80 mt-0.5">Tường net + Trần sàn</div>
         </div>
 
       </div>

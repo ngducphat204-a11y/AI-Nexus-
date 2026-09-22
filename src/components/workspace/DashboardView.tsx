@@ -23,6 +23,7 @@ import {
   ExternalLink
 } from 'lucide-react';
 import { ProjectInfo } from '../../types';
+import { useWorkspaceTheme } from '../../data/ThemeContext';
 
 interface DashboardViewProps {
   projects: ProjectInfo[];
@@ -33,47 +34,53 @@ interface DashboardViewProps {
 
 // CAD Miniature Blueprint Thumbnail component
 const CadThumbnail: React.FC<{ type?: string; index: number }> = ({ index }) => {
+  const { themeConfig } = useWorkspaceTheme();
+  const wallStroke = themeConfig.cadOuterWall;
+
   return (
-    <div className="w-13 h-10 rounded-lg bg-[#080d18] border border-amber-500/20 p-1 flex items-center justify-center shrink-0 overflow-hidden relative group-hover:border-[#fbbf24]/60 transition-colors">
-      <svg viewBox="0 0 52 40" className="w-full h-full stroke-[#fbbf24]/85 fill-none" strokeWidth="1">
+    <div className={`w-13 h-10 rounded-lg bg-[#080d18] border ${themeConfig.accentBorder} p-1 flex items-center justify-center shrink-0 overflow-hidden relative group-hover:border-white/40 transition-colors`}>
+      <svg viewBox="0 0 52 40" className="w-full h-full fill-none" stroke={wallStroke} strokeWidth="1">
         {index % 3 === 0 && (
           <>
             {/* Office floor plan wireframe */}
-            <rect x="3" y="3" width="46" height="34" stroke="#fbbf24" strokeWidth="1.2" />
-            <line x1="3" y1="16" x2="49" y2="16" stroke="#fbbf24" strokeWidth="0.8" />
-            <line x1="20" y1="3" x2="20" y2="37" stroke="#fbbf24" strokeWidth="0.8" />
-            <line x1="36" y1="16" x2="36" y2="37" stroke="#fbbf24" strokeWidth="0.8" />
-            <rect x="7" y="6" width="9" height="7" stroke="#fbbf24" strokeWidth="0.6" strokeDasharray="1,1" />
-            <rect x="24" y="20" width="8" height="6" stroke="#fbbf24" strokeWidth="0.6" />
+            <rect x="3" y="3" width="46" height="34" stroke={wallStroke} strokeWidth="1.2" />
+            <line x1="3" y1="16" x2="49" y2="16" stroke={wallStroke} strokeWidth="0.8" />
+            <line x1="20" y1="3" x2="20" y2="37" stroke={wallStroke} strokeWidth="0.8" />
+            <line x1="36" y1="16" x2="36" y2="37" stroke={wallStroke} strokeWidth="0.8" />
+            <rect x="7" y="6" width="9" height="7" stroke={wallStroke} strokeWidth="0.6" strokeDasharray="1,1" />
+            <rect x="24" y="20" width="8" height="6" stroke={wallStroke} strokeWidth="0.6" />
             {/* Door swing */}
-            <path d="M 20 12 A 4 4 0 0 1 24 16" stroke="#fbbf24" strokeWidth="0.6" />
+            <path d="M 20 12 A 4 4 0 0 1 24 16" stroke={wallStroke} strokeWidth="0.6" />
           </>
         )}
         {index % 3 === 1 && (
           <>
             {/* Apartment residential blueprint */}
-            <rect x="3" y="3" width="46" height="34" stroke="#fbbf24" strokeWidth="1.2" />
-            <line x1="26" y1="3" x2="26" y2="37" stroke="#fbbf24" strokeWidth="0.8" />
-            <line x1="3" y1="20" x2="26" y2="20" stroke="#fbbf24" strokeWidth="0.8" />
-            <line x1="26" y1="24" x2="49" y2="24" stroke="#fbbf24" strokeWidth="0.8" />
-            <circle cx="14" cy="11" r="3" stroke="#fbbf24" strokeWidth="0.6" />
-            <path d="M 26 14 A 4 4 0 0 1 30 18" stroke="#fbbf24" strokeWidth="0.6" />
-            <rect x="30" y="7" width="14" height="12" stroke="#fbbf24" strokeWidth="0.6" strokeDasharray="1.5,1.5" />
+            <rect x="3" y="3" width="46" height="34" stroke={wallStroke} strokeWidth="1.2" />
+            <line x1="26" y1="3" x2="26" y2="37" stroke={wallStroke} strokeWidth="0.8" />
+            <line x1="3" y1="20" x2="26" y2="20" stroke={wallStroke} strokeWidth="0.8" />
+            <line x1="26" y1="24" x2="49" y2="24" stroke={wallStroke} strokeWidth="0.8" />
+            <circle cx="14" cy="11" r="3" stroke={wallStroke} strokeWidth="0.6" />
+            <path d="M 26 14 A 4 4 0 0 1 30 18" stroke={wallStroke} strokeWidth="0.6" />
+            <rect x="30" y="7" width="14" height="12" stroke={wallStroke} strokeWidth="0.6" strokeDasharray="1.5,1.5" />
           </>
         )}
         {index % 3 === 2 && (
           <>
             {/* House / Factory structure */}
-            <polygon points="3,10 26,3 49,10 49,37 3,37" stroke="#fbbf24" strokeWidth="1" />
-            <line x1="3" y1="22" x2="49" y2="22" stroke="#fbbf24" strokeWidth="0.8" />
-            <line x1="26" y1="10" x2="26" y2="37" stroke="#fbbf24" strokeWidth="0.8" />
-            <rect x="8" y="26" width="10" height="7" stroke="#fbbf24" strokeWidth="0.6" />
-            <rect x="32" y="26" width="10" height="7" stroke="#fbbf24" strokeWidth="0.6" />
+            <polygon points="3,10 26,3 49,10 49,37 3,37" stroke={wallStroke} strokeWidth="1" />
+            <line x1="3" y1="22" x2="49" y2="22" stroke={wallStroke} strokeWidth="0.8" />
+            <line x1="26" y1="10" x2="26" y2="37" stroke={wallStroke} strokeWidth="0.8" />
+            <rect x="8" y="26" width="10" height="7" stroke={wallStroke} strokeWidth="0.6" />
+            <rect x="32" y="26" width="10" height="7" stroke={wallStroke} strokeWidth="0.6" />
           </>
         )}
       </svg>
-      {/* subtle amber scanline dot */}
-      <div className="absolute top-1 right-1 w-1 h-1 rounded-full bg-[#fbbf24] animate-pulse" />
+      {/* subtle scanline dot */}
+      <div 
+        className="absolute top-1 right-1 w-1 h-1 rounded-full animate-pulse"
+        style={{ backgroundColor: wallStroke }}
+      />
     </div>
   );
 };
@@ -84,6 +91,7 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
   onCreateProject,
   onOpenDrawingReview,
 }) => {
+  const { themeConfig } = useWorkspaceTheme();
   const [activeFilter, setActiveFilter] = useState<'all' | 'processing' | 'completed' | 'review'>('all');
   const [searchQuery, setSearchQuery] = useState('');
   const [sortBy, setSortBy] = useState<'recent' | 'name' | 'progress'>('recent');
@@ -150,13 +158,15 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
     );
   };
 
+  const gridColor = themeConfig.gridStroke;
+
   return (
     <div 
       className="min-h-full p-4 sm:p-6 lg:p-8 space-y-6 text-white font-sans"
       style={{
         backgroundImage: `
-          linear-gradient(to right, rgba(245, 158, 11, 0.05) 1px, transparent 1px),
-          linear-gradient(to bottom, rgba(245, 158, 11, 0.05) 1px, transparent 1px)
+          linear-gradient(to right, ${gridColor} 1px, transparent 1px),
+          linear-gradient(to bottom, ${gridColor} 1px, transparent 1px)
         `,
         backgroundSize: '48px 48px',
         backgroundColor: '#080d18'
@@ -191,10 +201,10 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3.5">
         
         {/* Card 1: Tổng số dự án */}
-        <div className="p-4 rounded-2xl bg-[#0e1424] border border-white/10 flex flex-col justify-between hover:border-amber-500/30 transition-all">
+        <div className="p-4 rounded-2xl bg-[#0e1424] border border-white/10 flex flex-col justify-between hover:border-white/20 transition-all">
           <div className="flex items-center justify-between">
-            <div className="w-10 h-10 rounded-xl bg-amber-500/15 text-[#fbbf24] flex items-center justify-center border border-amber-500/30">
-              <Folder className="w-5 h-5 fill-[#fbbf24]/20" />
+            <div className={`w-10 h-10 rounded-xl ${themeConfig.badgeBg} ${themeConfig.accentText} flex items-center justify-center border ${themeConfig.accentBorder}`}>
+              <Folder className="w-5 h-5 opacity-80" />
             </div>
             <div className="flex items-center gap-1 text-[11px] font-semibold text-emerald-400">
               <ArrowUp className="w-3.5 h-3.5" />
@@ -210,7 +220,7 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
         </div>
 
         {/* Card 2: Đã hoàn thành */}
-        <div className="p-4 rounded-2xl bg-[#0e1424] border border-white/10 flex flex-col justify-between hover:border-amber-500/30 transition-all">
+        <div className="p-4 rounded-2xl bg-[#0e1424] border border-white/10 flex flex-col justify-between hover:border-white/20 transition-all">
           <div className="flex items-center justify-between">
             <div className="w-10 h-10 rounded-xl bg-[#0a3024] text-[#34d399] flex items-center justify-center border border-emerald-500/30">
               <CheckCircle2 className="w-5 h-5" />
@@ -226,9 +236,9 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
         </div>
 
         {/* Card 3: Đang xử lý */}
-        <div className="p-4 rounded-2xl bg-[#0e1424] border border-white/10 flex flex-col justify-between hover:border-amber-500/30 transition-all">
+        <div className="p-4 rounded-2xl bg-[#0e1424] border border-white/10 flex flex-col justify-between hover:border-white/20 transition-all">
           <div className="flex items-center justify-between">
-            <div className="w-10 h-10 rounded-xl bg-[#322507] text-[#fbbf24] flex items-center justify-center border border-amber-500/30">
+            <div className={`w-10 h-10 rounded-xl ${themeConfig.badgeBg} ${themeConfig.accentText} flex items-center justify-center border ${themeConfig.accentBorder}`}>
               <Clock className="w-5 h-5" />
             </div>
           </div>
@@ -241,7 +251,7 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
         </div>
 
         {/* Card 4: Cần kiểm tra */}
-        <div className="p-4 rounded-2xl bg-[#0e1424] border border-white/10 flex flex-col justify-between hover:border-amber-500/30 transition-all">
+        <div className="p-4 rounded-2xl bg-[#0e1424] border border-white/10 flex flex-col justify-between hover:border-white/20 transition-all">
           <div className="flex items-center justify-between">
             <div className="w-10 h-10 rounded-xl bg-[#381219] text-[#f87171] flex items-center justify-center border border-rose-500/30">
               <AlertTriangle className="w-5 h-5" />
@@ -259,22 +269,22 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
         {/* Card 5: Tạo dự án mới (Action CTA Button Card) */}
         <button
           onClick={onCreateProject}
-          className="p-4 rounded-2xl bg-gradient-to-r from-[#fbbf24] via-[#f59e0b] to-[#ea580c] hover:brightness-110 active:scale-98 text-[#080d18] flex items-center justify-between shadow-[0_4px_20px_rgba(245,158,11,0.45)] transition-all cursor-pointer text-left group"
+          className={`p-4 rounded-2xl ${themeConfig.primaryBtn} hover:brightness-110 active:scale-98 flex items-center justify-between shadow-lg transition-all cursor-pointer text-left group`}
         >
           <div className="flex items-center gap-3">
-            <div className="w-11 h-11 rounded-full bg-black/20 flex items-center justify-center text-[#080d18] shrink-0 group-hover:scale-105 transition-transform">
+            <div className="w-11 h-11 rounded-full bg-black/20 flex items-center justify-center text-inherit shrink-0 group-hover:scale-105 transition-transform">
               <Plus className="w-6 h-6 stroke-[3]" />
             </div>
             <div>
-              <div className="font-extrabold text-base text-[#080d18] leading-tight">
+              <div className="font-extrabold text-base leading-tight">
                 Tạo dự án mới
               </div>
-              <div className="text-[11px] text-[#080d18]/80 mt-0.5 leading-snug font-medium">
+              <div className="text-[11px] opacity-80 mt-0.5 leading-snug font-medium">
                 Tải lên bản vẽ CAD để bắt đầu bóc tách
               </div>
             </div>
           </div>
-          <ArrowRight className="w-5 h-5 text-[#080d18] stroke-[2.5] shrink-0 group-hover:translate-x-1 transition-transform ml-2" />
+          <ArrowRight className="w-5 h-5 stroke-[2.5] shrink-0 group-hover:translate-x-1 transition-transform ml-2" />
         </button>
 
       </div>
@@ -291,16 +301,16 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
           {/* Step 1 */}
           <div 
             onClick={onCreateProject}
-            className="p-3.5 rounded-2xl bg-[#0e1424] border border-white/10 hover:border-amber-500/40 transition-all flex items-center gap-3.5 cursor-pointer group shadow-sm"
+            className={`p-3.5 rounded-2xl bg-[#0e1424] border border-white/10 hover:${themeConfig.accentBorder} transition-all flex items-center gap-3.5 cursor-pointer group shadow-sm`}
           >
-            <div className="w-8 h-8 rounded-full bg-[#161a26] text-[#fbbf24] border border-amber-500/30 font-bold text-xs flex items-center justify-center font-mono shrink-0">
+            <div className={`w-8 h-8 rounded-full bg-[#161a26] ${themeConfig.accentText} border ${themeConfig.accentBorder} font-bold text-xs flex items-center justify-center font-mono shrink-0`}>
               1
             </div>
-            <div className="w-9 h-9 rounded-xl bg-amber-500/15 text-[#fbbf24] border border-amber-500/30 flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform">
+            <div className={`w-9 h-9 rounded-xl ${themeConfig.badgeBg} ${themeConfig.accentText} border ${themeConfig.accentBorder} flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform`}>
               <UploadCloud className="w-4 h-4" />
             </div>
             <div className="truncate">
-              <div className="font-bold text-xs text-white group-hover:text-[#fbbf24] transition-colors">
+              <div className={`font-bold text-xs text-white group-hover:${themeConfig.accentText} transition-colors`}>
                 Tải lên bản vẽ
               </div>
               <div className="text-[11px] text-white/50 truncate">
@@ -312,16 +322,16 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
           {/* Step 2 */}
           <div 
             onClick={onCreateProject}
-            className="p-3.5 rounded-2xl bg-[#0e1424] border border-white/10 hover:border-amber-500/40 transition-all flex items-center gap-3.5 cursor-pointer group shadow-sm"
+            className={`p-3.5 rounded-2xl bg-[#0e1424] border border-white/10 hover:${themeConfig.accentBorder} transition-all flex items-center gap-3.5 cursor-pointer group shadow-sm`}
           >
-            <div className="w-8 h-8 rounded-full bg-[#161a26] text-[#fbbf24] border border-amber-500/30 font-bold text-xs flex items-center justify-center font-mono shrink-0">
+            <div className={`w-8 h-8 rounded-full bg-[#161a26] ${themeConfig.accentText} border ${themeConfig.accentBorder} font-bold text-xs flex items-center justify-center font-mono shrink-0`}>
               2
             </div>
-            <div className="w-9 h-9 rounded-xl bg-amber-500/15 text-[#fbbf24] border border-amber-500/30 flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform">
+            <div className={`w-9 h-9 rounded-xl ${themeConfig.badgeBg} ${themeConfig.accentText} border ${themeConfig.accentBorder} flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform`}>
               <Sliders className="w-4 h-4" />
             </div>
             <div className="truncate">
-              <div className="font-bold text-xs text-white group-hover:text-[#fbbf24] transition-colors">
+              <div className={`font-bold text-xs text-white group-hover:${themeConfig.accentText} transition-colors`}>
                 Thiết lập dự án
               </div>
               <div className="text-[11px] text-white/50 truncate">
@@ -333,16 +343,16 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
           {/* Step 3 */}
           <div 
             onClick={() => onSelectProject(projects[0])}
-            className="p-3.5 rounded-2xl bg-[#0e1424] border border-white/10 hover:border-amber-500/40 transition-all flex items-center gap-3.5 cursor-pointer group shadow-sm"
+            className={`p-3.5 rounded-2xl bg-[#0e1424] border border-white/10 hover:${themeConfig.accentBorder} transition-all flex items-center gap-3.5 cursor-pointer group shadow-sm`}
           >
-            <div className="w-8 h-8 rounded-full bg-[#161a26] text-[#fbbf24] border border-amber-500/30 font-bold text-xs flex items-center justify-center font-mono shrink-0">
+            <div className={`w-8 h-8 rounded-full bg-[#161a26] ${themeConfig.accentText} border ${themeConfig.accentBorder} font-bold text-xs flex items-center justify-center font-mono shrink-0`}>
               3
             </div>
-            <div className="w-9 h-9 rounded-xl bg-amber-500/15 text-[#fbbf24] border border-amber-500/30 flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform">
+            <div className={`w-9 h-9 rounded-xl ${themeConfig.badgeBg} ${themeConfig.accentText} border ${themeConfig.accentBorder} flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform`}>
               <Cpu className="w-4 h-4" />
             </div>
             <div className="truncate">
-              <div className="font-bold text-xs text-white group-hover:text-[#fbbf24] transition-colors">
+              <div className={`font-bold text-xs text-white group-hover:${themeConfig.accentText} transition-colors`}>
                 AI phân tích
               </div>
               <div className="text-[11px] text-white/50 truncate">
@@ -354,16 +364,16 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
           {/* Step 4 */}
           <div 
             onClick={() => onOpenDrawingReview(projects[0])}
-            className="p-3.5 rounded-2xl bg-[#0e1424] border border-white/10 hover:border-amber-500/40 transition-all flex items-center gap-3.5 cursor-pointer group shadow-sm"
+            className={`p-3.5 rounded-2xl bg-[#0e1424] border border-white/10 hover:${themeConfig.accentBorder} transition-all flex items-center gap-3.5 cursor-pointer group shadow-sm`}
           >
-            <div className="w-8 h-8 rounded-full bg-[#161a26] text-[#fbbf24] border border-amber-500/30 font-bold text-xs flex items-center justify-center font-mono shrink-0">
+            <div className={`w-8 h-8 rounded-full bg-[#161a26] ${themeConfig.accentText} border ${themeConfig.accentBorder} font-bold text-xs flex items-center justify-center font-mono shrink-0`}>
               4
             </div>
-            <div className="w-9 h-9 rounded-xl bg-amber-500/15 text-[#fbbf24] border border-amber-500/30 flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform">
+            <div className={`w-9 h-9 rounded-xl ${themeConfig.badgeBg} ${themeConfig.accentText} border ${themeConfig.accentBorder} flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform`}>
               <BarChart3 className="w-4 h-4" />
             </div>
             <div className="truncate">
-              <div className="font-bold text-xs text-white group-hover:text-[#fbbf24] transition-colors">
+              <div className={`font-bold text-xs text-white group-hover:${themeConfig.accentText} transition-colors`}>
                 Xem kết quả
               </div>
               <div className="text-[11px] text-white/50 truncate">
@@ -392,7 +402,7 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
               onClick={() => { setActiveFilter('all'); setCurrentPage(1); }}
               className={`px-3 py-1.5 rounded-xl text-xs font-semibold transition-all cursor-pointer ${
                 activeFilter === 'all'
-                  ? 'bg-amber-500/15 text-[#fbbf24] border border-amber-500/40 shadow-[0_0_12px_rgba(245,158,11,0.15)]'
+                  ? `${themeConfig.badgeBg} ${themeConfig.accentText} border ${themeConfig.accentBorder} shadow-sm`
                   : 'bg-transparent text-white/60 hover:text-white border border-transparent'
               }`}
             >
@@ -403,7 +413,7 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
               onClick={() => { setActiveFilter('processing'); setCurrentPage(1); }}
               className={`px-3 py-1.5 rounded-xl text-xs font-semibold transition-all cursor-pointer ${
                 activeFilter === 'processing'
-                  ? 'bg-amber-500/15 text-[#fbbf24] border border-amber-500/40 shadow-[0_0_12px_rgba(245,158,11,0.15)]'
+                  ? `${themeConfig.badgeBg} ${themeConfig.accentText} border ${themeConfig.accentBorder} shadow-sm`
                   : 'bg-transparent text-white/60 hover:text-white border border-transparent'
               }`}
             >
@@ -414,7 +424,7 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
               onClick={() => { setActiveFilter('completed'); setCurrentPage(1); }}
               className={`px-3 py-1.5 rounded-xl text-xs font-semibold transition-all cursor-pointer ${
                 activeFilter === 'completed'
-                  ? 'bg-amber-500/15 text-[#fbbf24] border border-amber-500/40 shadow-[0_0_12px_rgba(245,158,11,0.15)]'
+                  ? `${themeConfig.badgeBg} ${themeConfig.accentText} border ${themeConfig.accentBorder} shadow-sm`
                   : 'bg-transparent text-white/60 hover:text-white border border-transparent'
               }`}
             >
@@ -425,7 +435,7 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
               onClick={() => { setActiveFilter('review'); setCurrentPage(1); }}
               className={`px-3 py-1.5 rounded-xl text-xs font-semibold transition-all cursor-pointer ${
                 activeFilter === 'review'
-                  ? 'bg-amber-500/15 text-[#fbbf24] border border-amber-500/40 shadow-[0_0_12px_rgba(245,158,11,0.15)]'
+                  ? `${themeConfig.badgeBg} ${themeConfig.accentText} border ${themeConfig.accentBorder} shadow-sm`
                   : 'bg-transparent text-white/60 hover:text-white border border-transparent'
               }`}
             >
@@ -441,7 +451,7 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
               <select 
                 value={sortBy} 
                 onChange={(e) => setSortBy(e.target.value as any)}
-                className="bg-transparent text-[#fbbf24] font-medium focus:outline-none cursor-pointer"
+                className={`bg-transparent ${themeConfig.accentText} font-medium focus:outline-none cursor-pointer`}
               >
                 <option value="recent" className="bg-[#0e1424] text-white">Cập nhật gần nhất</option>
                 <option value="name" className="bg-[#0e1424] text-white">Tên dự án</option>
@@ -527,7 +537,7 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
                         type="checkbox"
                         checked={isSelected}
                         onChange={() => handleToggleSelectOne(proj.id)}
-                        className="rounded bg-[#080d18] border-white/20 text-amber-500 focus:ring-0 cursor-pointer accent-amber-500"
+                        className={`rounded bg-[#080d18] border-white/20 ${themeConfig.accentText} focus:ring-0 cursor-pointer`}
                       />
                     </td>
 
@@ -538,7 +548,7 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
                         <div>
                           <div 
                             onClick={() => onSelectProject(proj)}
-                            className="font-bold text-white group-hover:text-[#fbbf24] transition-colors cursor-pointer"
+                            className={`font-bold text-white group-hover:${themeConfig.accentText} transition-colors cursor-pointer`}
                           >
                             {proj.name}
                           </div>
@@ -568,8 +578,8 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
                         </span>
                       )}
                       {isProcessing && (
-                        <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-semibold bg-[#332408] text-[#fbbf24] border border-[#d97706]/40">
-                          <span className="w-1.5 h-1.5 rounded-full bg-[#fbbf24] animate-pulse" />
+                        <span className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-semibold ${themeConfig.badgeBg} ${themeConfig.accentText} border ${themeConfig.accentBorder}`}>
+                          <span className={`w-1.5 h-1.5 rounded-full ${themeConfig.activeIndicator} animate-pulse`} />
                           <span>Đang xử lý</span>
                         </span>
                       )}
@@ -586,7 +596,7 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
                       <div className="flex items-center gap-2">
                         <div className="flex-1 h-1.5 rounded-full bg-[#080d18] overflow-hidden">
                           <div 
-                            className="h-full bg-gradient-to-r from-[#fbbf24] to-[#ea580c] rounded-full transition-all duration-500" 
+                            className={`h-full ${themeConfig.primaryBtn} rounded-full transition-all duration-500`} 
                             style={{ width: `${progress}%` }}
                           />
                         </div>
@@ -610,7 +620,7 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
                         {isCompleted && (
                           <button
                             onClick={() => onOpenDrawingReview(proj)}
-                            className="px-3 py-1 rounded-lg text-xs font-semibold text-[#fbbf24] bg-amber-500/10 border border-amber-500/30 hover:bg-[#fbbf24] hover:text-[#080d18] transition-all cursor-pointer"
+                            className={`px-3 py-1 rounded-lg text-xs font-semibold ${themeConfig.accentText} ${themeConfig.badgeBg} border ${themeConfig.accentBorder} hover:opacity-90 transition-all cursor-pointer`}
                           >
                             Xem kết quả
                           </button>
@@ -618,7 +628,7 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
                         {isProcessing && (
                           <button
                             onClick={() => onOpenDrawingReview(proj)}
-                            className="px-3 py-1 rounded-lg text-xs font-semibold text-[#fbbf24] bg-amber-500/10 border border-amber-500/30 hover:bg-[#fbbf24] hover:text-[#080d18] transition-all cursor-pointer"
+                            className={`px-3 py-1 rounded-lg text-xs font-semibold ${themeConfig.accentText} ${themeConfig.badgeBg} border ${themeConfig.accentBorder} hover:opacity-90 transition-all cursor-pointer`}
                           >
                             Tiếp tục
                           </button>
@@ -672,7 +682,7 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
                   onClick={() => setCurrentPage(pageNum)}
                   className={`w-7 h-7 rounded-lg font-mono text-xs font-semibold transition-colors cursor-pointer ${
                     isActive
-                      ? 'bg-gradient-to-r from-[#fbbf24] to-[#ea580c] text-[#080d18] font-bold'
+                      ? `${themeConfig.primaryBtn} font-bold shadow-xs`
                       : 'border border-white/10 text-white/60 hover:text-white hover:bg-white/5'
                   }`}
                 >
@@ -701,7 +711,7 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
         {/* Left Card: Mẹo sử dụng */}
         <div className="lg:col-span-8 p-4 sm:p-5 rounded-2xl bg-[#0e1424] border border-white/10 flex flex-col sm:flex-row sm:items-center justify-between gap-4 shadow-sm">
           <div className="flex items-start gap-3.5">
-            <div className="w-10 h-10 rounded-xl bg-amber-500/15 border border-amber-500/30 text-[#fbbf24] flex items-center justify-center shrink-0">
+            <div className={`w-10 h-10 rounded-xl ${themeConfig.badgeBg} border ${themeConfig.accentBorder} ${themeConfig.accentText} flex items-center justify-center shrink-0`}>
               <Lightbulb className="w-5 h-5" />
             </div>
             <div>
@@ -716,7 +726,7 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
 
           <button
             onClick={() => onSelectProject(projects[0])}
-            className="px-3.5 py-2 rounded-xl text-xs font-semibold text-[#fbbf24] bg-amber-500/10 border border-amber-500/40 hover:bg-[#fbbf24] hover:text-[#080d18] transition-all whitespace-nowrap self-start sm:self-auto cursor-pointer flex items-center gap-1.5"
+            className={`px-3.5 py-2 rounded-xl text-xs font-semibold ${themeConfig.accentText} ${themeConfig.badgeBg} border ${themeConfig.accentBorder} hover:opacity-90 transition-all whitespace-nowrap self-start sm:self-auto cursor-pointer flex items-center gap-1.5`}
           >
             <span>Xem hướng dẫn chi tiết</span>
             <ArrowRight className="w-3.5 h-3.5" />
@@ -726,7 +736,7 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
         {/* Right Card: Dung lượng lưu trữ */}
         <div className="lg:col-span-4 p-4 sm:p-5 rounded-2xl bg-[#0e1424] border border-white/10 flex items-center justify-between gap-4 shadow-sm">
           <div className="flex items-center gap-3.5 flex-1 min-w-0">
-            <div className="w-10 h-10 rounded-xl bg-amber-500/15 border border-amber-500/30 text-[#fbbf24] flex items-center justify-center shrink-0">
+            <div className={`w-10 h-10 rounded-xl ${themeConfig.badgeBg} border ${themeConfig.accentBorder} ${themeConfig.accentText} flex items-center justify-center shrink-0`}>
               <Database className="w-5 h-5" />
             </div>
             <div className="flex-1 min-w-0">
@@ -735,19 +745,21 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
               </div>
               <div className="mt-2 flex items-center gap-2">
                 <div className="flex-1 h-1.5 rounded-full bg-[#080d18] overflow-hidden">
-                  <div className="h-full bg-gradient-to-r from-[#fbbf24] to-[#ea580c] rounded-full w-[24%]" />
+                  <div 
+                    className={`h-full ${themeConfig.primaryBtn} rounded-full w-[24%]`} 
+                  />
                 </div>
               </div>
               <div className="flex items-center justify-between text-[11px] font-mono text-white/50 mt-1">
                 <span>2.4 GB / 10 GB</span>
-                <span className="text-[#fbbf24]">24%</span>
+                <span className={themeConfig.accentText}>24%</span>
               </div>
             </div>
           </div>
 
           <button
             onClick={() => alert('Gói hiện tại: Kỹ sư Pro (10 GB). Liên hệ nâng cấp lên gói Enterprise (100 GB).')}
-            className="px-3.5 py-2 rounded-xl text-xs font-extrabold text-[#080d18] bg-gradient-to-r from-[#fbbf24] to-[#ea580c] hover:brightness-110 transition-all whitespace-nowrap cursor-pointer shrink-0 shadow-sm"
+            className={`px-3.5 py-2 rounded-xl text-xs font-extrabold ${themeConfig.primaryBtn} hover:brightness-110 transition-all whitespace-nowrap cursor-pointer shrink-0 shadow-sm`}
           >
             Nâng cấp
           </button>

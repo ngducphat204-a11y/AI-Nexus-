@@ -17,6 +17,7 @@ import {
   ShieldCheck,
   Calculator
 } from 'lucide-react';
+import { useWorkspaceTheme } from '../../data/ThemeContext';
 
 interface CreateProjectViewProps {
   onCancel: () => void;
@@ -59,6 +60,8 @@ export const CreateProjectView: React.FC<CreateProjectViewProps> = ({
   onNavigateToReview,
   onNavigateToEstimate,
 }) => {
+  const { themeConfig } = useWorkspaceTheme();
+
   // Master Flow Phase:
   // 1: Minimal Upload & Geometric Config (Tải bản vẽ & Thiết lập hình học)
   // 2: Visual AI Scanning (Quét CAD trực quan & đo đạc)
@@ -117,8 +120,8 @@ export const CreateProjectView: React.FC<CreateProjectViewProps> = ({
       netWallArea: +(21.4 * wallHeight - 4.8).toFixed(1),
       ceilingArea: 28.5,
       totalSurfaceArea: +((21.4 * wallHeight - 4.8) + (includeCeiling ? 28.5 : 0)).toFixed(1),
-      color: 'rgba(245, 158, 11, 0.22)',
-      colorBorder: '#f59e0b',
+      color: themeConfig.roomColors.room1.fill,
+      colorBorder: themeConfig.roomColors.room1.stroke,
     },
     {
       id: 'room-02',
@@ -132,8 +135,8 @@ export const CreateProjectView: React.FC<CreateProjectViewProps> = ({
       netWallArea: +(22.8 * wallHeight - 5.2).toFixed(1),
       ceilingArea: 32.0,
       totalSurfaceArea: +((22.8 * wallHeight - 5.2) + (includeCeiling ? 32.0 : 0)).toFixed(1),
-      color: 'rgba(251, 191, 36, 0.22)',
-      colorBorder: '#fbbf24',
+      color: themeConfig.roomColors.room2.fill,
+      colorBorder: themeConfig.roomColors.room2.stroke,
     },
     {
       id: 'room-03',
@@ -147,8 +150,8 @@ export const CreateProjectView: React.FC<CreateProjectViewProps> = ({
       netWallArea: +(23.6 * wallHeight - 6.4).toFixed(1),
       ceilingArea: 34.2,
       totalSurfaceArea: +((23.6 * wallHeight - 6.4) + (includeCeiling ? 34.2 : 0)).toFixed(1),
-      color: 'rgba(234, 88, 12, 0.22)',
-      colorBorder: '#ea580c',
+      color: themeConfig.roomColors.room3.fill,
+      colorBorder: themeConfig.roomColors.room3.stroke,
     },
     {
       id: 'room-04',
@@ -162,8 +165,8 @@ export const CreateProjectView: React.FC<CreateProjectViewProps> = ({
       netWallArea: +(36.4 * wallHeight - 12.6).toFixed(1),
       ceilingArea: 48.6,
       totalSurfaceArea: +((36.4 * wallHeight - 12.6) + (includeCeiling ? 48.6 : 0)).toFixed(1),
-      color: 'rgba(56, 189, 248, 0.20)',
-      colorBorder: '#38bdf8',
+      color: themeConfig.roomColors.room4.fill,
+      colorBorder: themeConfig.roomColors.room4.stroke,
     },
     {
       id: 'room-05',
@@ -177,7 +180,7 @@ export const CreateProjectView: React.FC<CreateProjectViewProps> = ({
       netWallArea: +(18.2 * wallHeight - 3.8).toFixed(1),
       ceilingArea: 19.8,
       totalSurfaceArea: +((18.2 * wallHeight - 3.8) + (includeCeiling ? 19.8 : 0)).toFixed(1),
-      color: 'rgba(168, 85, 247, 0.2)',
+      color: 'rgba(168, 85, 247, 0.18)',
       colorBorder: '#a855f7',
     },
     {
@@ -192,7 +195,7 @@ export const CreateProjectView: React.FC<CreateProjectViewProps> = ({
       netWallArea: +(20.6 * wallHeight - 5.6).toFixed(1),
       ceilingArea: 26.4,
       totalSurfaceArea: +((20.6 * wallHeight - 5.6) + (includeCeiling ? 26.4 : 0)).toFixed(1),
-      color: 'rgba(16, 185, 129, 0.2)',
+      color: 'rgba(16, 185, 129, 0.18)',
       colorBorder: '#10b981',
     },
   ];
@@ -283,11 +286,11 @@ export const CreateProjectView: React.FC<CreateProjectViewProps> = ({
       className="min-h-full p-4 sm:p-6 lg:p-7 text-white font-sans space-y-6 transition-all duration-300"
       style={{
         backgroundImage: `
-          linear-gradient(to right, rgba(245, 158, 11, 0.05) 1px, transparent 1px),
-          linear-gradient(to bottom, rgba(245, 158, 11, 0.05) 1px, transparent 1px)
+          linear-gradient(to right, ${themeConfig.gridStroke} 1px, transparent 1px),
+          linear-gradient(to bottom, ${themeConfig.gridStroke} 1px, transparent 1px)
         `,
         backgroundSize: '48px 48px',
-        backgroundColor: '#080d18'
+        backgroundColor: themeConfig.bgCanvas
       }}
     >
       {/* ─────────────────────────────────────────────────────────────
@@ -296,7 +299,7 @@ export const CreateProjectView: React.FC<CreateProjectViewProps> = ({
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-white/10 pb-4">
         <div>
           <div className="flex items-center gap-2">
-            <span className="px-2 py-0.5 rounded-full bg-amber-500/15 border border-amber-500/30 text-[#fbbf24] text-[11px] font-semibold">
+            <span className={`px-2.5 py-0.5 rounded-full ${themeConfig.accentBadgeBg} text-[11px] font-semibold`}>
               Bóc tách hình học CAD
             </span>
             <span className="text-white/40 text-xs">•</span>
@@ -315,11 +318,11 @@ export const CreateProjectView: React.FC<CreateProjectViewProps> = ({
             onClick={() => setPhase(1)}
             className={`px-3 py-1.5 rounded-lg flex items-center gap-2 font-medium transition-all ${
               phase === 1 
-                ? 'bg-gradient-to-r from-[#fbbf24] via-[#f59e0b] to-[#ea580c] text-[#080d18] font-bold shadow-xs' 
+                ? `${themeConfig.primaryBtn} font-bold shadow-xs` 
                 : 'text-white/60 hover:text-white cursor-pointer'
             }`}
           >
-            <span className={`w-4 h-4 rounded-full text-[10px] flex items-center justify-center font-bold ${phase === 1 ? 'bg-black/20 text-[#080d18]' : 'bg-white/20 text-white'}`}>1</span>
+            <span className={`w-4 h-4 rounded-full text-[10px] flex items-center justify-center font-bold ${phase === 1 ? 'bg-black/20 text-white' : 'bg-white/20 text-white'}`}>1</span>
             <span>Tải bản vẽ</span>
           </button>
 
@@ -332,11 +335,11 @@ export const CreateProjectView: React.FC<CreateProjectViewProps> = ({
             }}
             className={`px-3 py-1.5 rounded-lg flex items-center gap-2 font-medium transition-all ${
               phase === 2 
-                ? 'bg-gradient-to-r from-[#fbbf24] via-[#f59e0b] to-[#ea580c] text-[#080d18] font-bold shadow-xs' 
+                ? `${themeConfig.primaryBtn} font-bold shadow-xs` 
                 : 'text-white/60 hover:text-white cursor-pointer'
             }`}
           >
-            <span className={`w-4 h-4 rounded-full text-[10px] flex items-center justify-center font-bold ${phase === 2 ? 'bg-black/20 text-[#080d18]' : 'bg-white/20 text-white'}`}>2</span>
+            <span className={`w-4 h-4 rounded-full text-[10px] flex items-center justify-center font-bold ${phase === 2 ? 'bg-black/20 text-white' : 'bg-white/20 text-white'}`}>2</span>
             <span>Quét CAD</span>
           </button>
 
@@ -346,11 +349,11 @@ export const CreateProjectView: React.FC<CreateProjectViewProps> = ({
             onClick={() => setPhase(3)}
             className={`px-3 py-1.5 rounded-lg flex items-center gap-2 font-medium transition-all ${
               phase === 3 
-                ? 'bg-gradient-to-r from-[#fbbf24] via-[#f59e0b] to-[#ea580c] text-[#080d18] font-bold shadow-xs' 
+                ? `${themeConfig.primaryBtn} font-bold shadow-xs` 
                 : 'text-white/60 hover:text-white cursor-pointer'
             }`}
           >
-            <span className={`w-4 h-4 rounded-full text-[10px] flex items-center justify-center font-bold ${phase === 3 ? 'bg-black/20 text-[#080d18]' : 'bg-white/20 text-white'}`}>3</span>
+            <span className={`w-4 h-4 rounded-full text-[10px] flex items-center justify-center font-bold ${phase === 3 ? 'bg-black/20 text-white' : 'bg-white/20 text-white'}`}>3</span>
             <span>Bảng bóc tách</span>
           </button>
         </div>
@@ -364,7 +367,7 @@ export const CreateProjectView: React.FC<CreateProjectViewProps> = ({
         <div className="max-w-3xl mx-auto space-y-6 pt-2">
           
           {/* File Upload Hero Dropzone */}
-          <div className="rounded-2xl bg-[#0e1424] border border-white/10 p-6 space-y-5 shadow-xl relative overflow-hidden">
+          <div className={`rounded-2xl ${themeConfig.cardBg} border border-white/10 p-6 space-y-5 shadow-xl relative overflow-hidden`}>
             <input
               type="file"
               ref={fileInputRef}
@@ -393,23 +396,23 @@ export const CreateProjectView: React.FC<CreateProjectViewProps> = ({
                   });
                 }
               }}
-              className="border-2 border-dashed border-amber-500/40 hover:border-amber-400 bg-[#080d18]/80 hover:bg-[#080d18] rounded-2xl p-7 text-center transition-all cursor-pointer group"
+              className={`border-2 border-dashed ${themeConfig.cadDropzone} rounded-2xl p-7 text-center transition-all cursor-pointer group`}
             >
-              <div className="w-12 h-12 mx-auto rounded-2xl bg-amber-500/15 border border-amber-500/40 text-[#fbbf24] flex items-center justify-center shadow-[0_0_20px_rgba(245,158,11,0.25)] group-hover:scale-105 transition-transform mb-3">
+              <div className={`w-12 h-12 mx-auto rounded-2xl ${themeConfig.cadCloudIcon} flex items-center justify-center group-hover:scale-105 transition-transform mb-3`}>
                 <UploadCloud className="w-6 h-6" />
               </div>
               <h3 className="text-sm font-bold text-white">
                 Kéo thả bản vẽ CAD vào đây hoặc bấm để chọn tệp
               </h3>
               <p className="text-xs text-white/50 mt-1">
-                Hỗ trợ tệp <span className="text-[#fbbf24] font-semibold">AutoCAD (.DWG, .DXF)</span> và <span className="text-[#fbbf24] font-semibold">PDF vector</span> (Tối đa 100MB)
+                Hỗ trợ tệp <span className={`${themeConfig.accentText} font-semibold`}>AutoCAD (.DWG, .DXF)</span> và <span className={`${themeConfig.accentText} font-semibold`}>PDF vector</span> (Tối đa 100MB)
               </p>
             </div>
 
             {/* Ready File Badge */}
-            <div className="p-3.5 rounded-xl bg-[#161a26] border border-amber-500/20 flex items-center justify-between gap-3">
+            <div className={`p-3.5 rounded-xl ${themeConfig.cardBg} border ${themeConfig.accentBorder} flex items-center justify-between gap-3`}>
               <div className="flex items-center gap-3 min-w-0">
-                <div className="w-9 h-9 rounded-lg bg-amber-500/20 border border-amber-500/40 text-[#fbbf24] flex items-center justify-center shrink-0">
+                <div className={`w-9 h-9 rounded-lg ${themeConfig.accentIconBg} flex items-center justify-center shrink-0`}>
                   <FileText className="w-5 h-5" />
                 </div>
                 <div className="min-w-0">
@@ -520,7 +523,7 @@ export const CreateProjectView: React.FC<CreateProjectViewProps> = ({
                   />
                   <span>Tự động trừ diện tích khẩu độ cửa đi & cửa sổ</span>
                 </label>
-                <span className="text-[11px] text-[#fbbf24] font-mono font-semibold">
+                <span className={`text-[11px] ${themeConfig.accentText} font-mono font-semibold`}>
                   8 cửa phát hiện (38.4 m²)
                 </span>
               </div>
@@ -533,7 +536,7 @@ export const CreateProjectView: React.FC<CreateProjectViewProps> = ({
                   className="w-full p-2.5 px-3 bg-[#080d18]/60 hover:bg-[#080d18] flex items-center justify-between text-xs text-white/50 hover:text-white transition-colors cursor-pointer"
                 >
                   <div className="flex items-center gap-2">
-                    <Layers className="w-3.5 h-3.5 text-[#fbbf24]" />
+                    <Layers className={`w-3.5 h-3.5 ${themeConfig.accentText}`} />
                     <span>Xem chi tiết lớp bản vẽ & tọa độ CAD (24 layer)</span>
                   </div>
                   {isDetailsExpanded ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
@@ -561,16 +564,16 @@ export const CreateProjectView: React.FC<CreateProjectViewProps> = ({
                   if (onSaveDraft) onSaveDraft();
                   setTimeout(() => setIsDraftSaved(false), 2000);
                 }}
-                className="px-4 py-2.5 rounded-xl bg-amber-500/10 hover:bg-amber-500/20 border border-amber-500/30 text-[#fbbf24] text-xs font-semibold flex items-center gap-2 transition-all cursor-pointer"
+                className={`px-4 py-2.5 rounded-xl ${themeConfig.secondaryBtn} text-xs flex items-center gap-2 transition-all cursor-pointer`}
               >
-                <Bookmark className="w-4 h-4 text-[#fbbf24]" />
+                <Bookmark className={`w-4 h-4 ${themeConfig.accentText}`} />
                 <span>{isDraftSaved ? 'Đã lưu nháp ✓' : 'Lưu hồ sơ nháp'}</span>
               </button>
 
               <button
                 type="button"
                 onClick={handleStartAnalysis}
-                className="px-6 py-2.5 rounded-xl bg-gradient-to-r from-[#fbbf24] via-[#f59e0b] to-[#ea580c] hover:brightness-110 active:scale-98 text-[#080d18] text-xs font-extrabold flex items-center gap-2.5 shadow-[0_4px_20px_rgba(245,158,11,0.45)] transition-all cursor-pointer"
+                className={`px-6 py-2.5 rounded-xl ${themeConfig.primaryBtn} active:scale-98 text-xs flex items-center gap-2.5 transition-all cursor-pointer`}
               >
                 <Sparkles className="w-4 h-4 stroke-[2.5]" />
                 <span>Bắt đầu bóc tách hình học ⚡</span>
@@ -580,8 +583,8 @@ export const CreateProjectView: React.FC<CreateProjectViewProps> = ({
           </div>
 
           {/* Value Banner */}
-          <div className="p-3.5 rounded-xl bg-amber-500/10 border border-amber-500/20 flex items-center gap-3 text-xs text-white/80">
-            <ShieldCheck className="w-5 h-5 text-[#fbbf24] shrink-0" />
+          <div className={`p-3.5 rounded-xl ${themeConfig.cardBg} border ${themeConfig.accentBorder} flex items-center gap-3 text-xs text-white/80`}>
+            <ShieldCheck className={`w-5 h-5 ${themeConfig.accentText} shrink-0`} />
             <span>
               Hệ thống sẽ trích xuất <strong>chu vi, diện tích sàn, diện tích tường gộp và diện tích tường net</strong>. Thông số định mức sơn và dự toán chi phí sẽ được tính ở tab Dự toán riêng biệt.
             </span>
@@ -594,41 +597,56 @@ export const CreateProjectView: React.FC<CreateProjectViewProps> = ({
       ───────────────────────────────────────────────────────────── */}
       {phase === 2 && (
         <div className="max-w-2xl mx-auto py-8 text-center space-y-6">
-          <div className="relative w-64 h-64 mx-auto rounded-3xl bg-[#080d18] border-2 border-amber-500/40 p-4 shadow-[0_0_50px_rgba(245,158,11,0.2)] overflow-hidden flex items-center justify-center">
+          <div 
+            className="relative w-64 h-64 mx-auto rounded-3xl p-4 overflow-hidden flex items-center justify-center border-2 transition-all"
+            style={{
+              backgroundColor: themeConfig.bgCanvas,
+              borderColor: `${themeConfig.iconColor}55`,
+              boxShadow: `0 0 50px ${themeConfig.iconColor}33`
+            }}
+          >
             
             {/* Animated Laser Scanning Beam */}
             <div 
-              className="absolute left-0 right-0 h-1 bg-gradient-to-r from-transparent via-[#fbbf24] to-transparent shadow-[0_0_15px_#fbbf24] pointer-events-none transition-all duration-300"
+              className="absolute left-0 right-0 h-1 pointer-events-none transition-all duration-300"
               style={{
                 top: `${(scanProgress % 100)}%`,
+                background: `linear-gradient(to right, transparent, ${themeConfig.iconColor}, transparent)`,
+                boxShadow: `0 0 15px ${themeConfig.iconColor}`,
                 animation: 'pulse 1s infinite'
               }}
             />
 
             {/* Background Vector Preview during scan */}
             <svg viewBox="0 0 200 200" className="w-full h-full opacity-60">
-              <rect x="20" y="20" width="160" height="160" fill="none" stroke="#fbbf24" strokeWidth="2" />
-              <line x1="20" y1="90" x2="180" y2="90" stroke="#fbbf24" strokeWidth="1.5" />
-              <line x1="20" y1="120" x2="180" y2="120" stroke="#fbbf24" strokeWidth="1.5" />
-              <line x1="80" y1="20" x2="80" y2="90" stroke="#fbbf24" strokeWidth="1.5" />
-              <line x1="140" y1="20" x2="140" y2="90" stroke="#fbbf24" strokeWidth="1.5" />
+              <rect x="20" y="20" width="160" height="160" fill="none" stroke={themeConfig.cadOuterWall} strokeWidth="2" />
+              <line x1="20" y1="90" x2="180" y2="90" stroke={themeConfig.cadOuterWall} strokeWidth="1.5" />
+              <line x1="20" y1="120" x2="180" y2="120" stroke={themeConfig.cadOuterWall} strokeWidth="1.5" />
+              <line x1="80" y1="20" x2="80" y2="90" stroke={themeConfig.cadOuterWall} strokeWidth="1.5" />
+              <line x1="140" y1="20" x2="140" y2="90" stroke={themeConfig.cadOuterWall} strokeWidth="1.5" />
               {scanProgress > 30 && (
-                <rect x="25" y="25" width="50" height="60" fill="rgba(245,158,11,0.3)" />
+                <rect x="25" y="25" width="50" height="60" fill={themeConfig.roomColors.room1.fill} />
               )}
               {scanProgress > 60 && (
-                <rect x="85" y="25" width="50" height="60" fill="rgba(251,191,36,0.3)" />
+                <rect x="85" y="25" width="50" height="60" fill={themeConfig.roomColors.room2.fill} />
               )}
               {scanProgress > 85 && (
-                <rect x="145" y="25" width="30" height="60" fill="rgba(234,88,12,0.3)" />
+                <rect x="145" y="25" width="30" height="60" fill={themeConfig.roomColors.room3.fill} />
               )}
             </svg>
 
             {/* Center Spinning Ring */}
             <div className="absolute inset-0 flex items-center justify-center">
-              <div className="w-20 h-20 rounded-full border-2 border-amber-500/20 border-t-[#fbbf24] animate-spin" />
+              <div 
+                className="w-20 h-20 rounded-full border-2 border-white/10 animate-spin"
+                style={{ borderTopColor: themeConfig.iconColor }}
+              />
             </div>
             
-            <div className="absolute text-lg font-bold font-mono text-[#fbbf24]">
+            <div 
+              className="absolute text-lg font-bold font-mono"
+              style={{ color: themeConfig.iconColor }}
+            >
               {scanProgress}%
             </div>
           </div>
@@ -647,7 +665,7 @@ export const CreateProjectView: React.FC<CreateProjectViewProps> = ({
             <div className={`p-2.5 rounded-xl border flex items-center gap-3 transition-colors ${
               scanStepIndex >= 1 
                 ? 'bg-emerald-500/10 border-emerald-500/30 text-emerald-400' 
-                : 'bg-[#0e1424] border-white/10 text-white/40'
+                : `${themeConfig.cardBg} border-white/10 text-white/40`
             }`}>
               <CheckCircle2 className="w-4 h-4 shrink-0" />
               <span>Khép kín ranh giới tường & tính diện tích sàn 6 phòng</span>
@@ -656,7 +674,7 @@ export const CreateProjectView: React.FC<CreateProjectViewProps> = ({
             <div className={`p-2.5 rounded-xl border flex items-center gap-3 transition-colors ${
               scanStepIndex >= 2 
                 ? 'bg-emerald-500/10 border-emerald-500/30 text-emerald-400' 
-                : 'bg-[#0e1424] border-white/10 text-white/40'
+                : `${themeConfig.cardBg} border-white/10 text-white/40`
             }`}>
               <CheckCircle2 className="w-4 h-4 shrink-0" />
               <span>Đo chu vi tường & tính diện tích tường thô theo chiều cao {wallHeight}m</span>
@@ -665,7 +683,7 @@ export const CreateProjectView: React.FC<CreateProjectViewProps> = ({
             <div className={`p-2.5 rounded-xl border flex items-center gap-3 transition-colors ${
               scanStepIndex >= 3 
                 ? 'bg-emerald-500/10 border-emerald-500/30 text-emerald-400' 
-                : 'bg-[#0e1424] border-white/10 text-white/40'
+                : `${themeConfig.cardBg} border-white/10 text-white/40`
             }`}>
               <CheckCircle2 className="w-4 h-4 shrink-0" />
               <span>Nhận diện 8 cửa đi/sổ và khấu trừ để tính diện tích tường net</span>
@@ -674,7 +692,7 @@ export const CreateProjectView: React.FC<CreateProjectViewProps> = ({
 
           <button
             onClick={() => setPhase(3)}
-            className="text-xs text-[#fbbf24] hover:underline cursor-pointer pt-2 font-medium"
+            className={`text-xs ${themeConfig.accentText} hover:underline cursor-pointer pt-2 font-medium`}
           >
             Bỏ qua & Xem ngay kết quả bóc tách →
           </button>
@@ -689,7 +707,7 @@ export const CreateProjectView: React.FC<CreateProjectViewProps> = ({
         <div className="space-y-4">
           
           {/* Top Geometric Summary Bar */}
-          <div className="rounded-2xl bg-[#0e1424] border border-white/10 p-4 flex flex-wrap items-center justify-between gap-4 shadow-xl">
+          <div className={`rounded-2xl ${themeConfig.cardBg} border border-white/10 p-4 flex flex-wrap items-center justify-between gap-4 shadow-xl`}>
             <div className="flex flex-wrap items-center gap-4 sm:gap-6 text-xs">
               <div>
                 <span className="text-white/50 block text-[10px]">TỔNG DIỆN TÍCH SÀN</span>
@@ -707,14 +725,14 @@ export const CreateProjectView: React.FC<CreateProjectViewProps> = ({
               <div className="h-7 w-px bg-white/10" />
               <div>
                 <span className="text-white/50 block text-[10px]">DIỆN TÍCH TƯỜNG (NET)</span>
-                <span className="font-bold text-[#fbbf24] text-sm sm:text-base font-mono">
+                <span className={`font-bold ${themeConfig.accentText} text-sm sm:text-base font-mono`}>
                   {totalNetWallArea.toFixed(1)} m²
                 </span>
               </div>
               <div className="h-7 w-px bg-white/10" />
               <div>
                 <span className="text-white/50 block text-[10px]">DIỆN TÍCH TRẦN</span>
-                <span className="font-bold text-amber-200/90 text-sm sm:text-base font-mono">
+                <span className="font-bold text-white/80 text-sm sm:text-base font-mono">
                   {totalCeilingArea.toFixed(1)} m²
                 </span>
               </div>
@@ -740,7 +758,7 @@ export const CreateProjectView: React.FC<CreateProjectViewProps> = ({
 
               <button
                 onClick={handleProceedToEstimate}
-                className="px-4 py-2 rounded-xl bg-gradient-to-r from-[#fbbf24] via-[#f59e0b] to-[#ea580c] hover:brightness-110 active:scale-98 text-xs text-[#080d18] font-extrabold flex items-center gap-2 transition-all cursor-pointer shadow-[0_4px_16px_rgba(245,158,11,0.35)]"
+                className={`px-4 py-2 rounded-xl ${themeConfig.primaryBtn} active:scale-98 text-xs flex items-center gap-2 transition-all cursor-pointer shadow-sm`}
                 title="Chuyển sang tab Dự toán chi phí & Tính sơn"
               >
                 <Calculator className="w-4 h-4 stroke-[2.5]" />
@@ -755,12 +773,12 @@ export const CreateProjectView: React.FC<CreateProjectViewProps> = ({
             {/* ============================================================
                 LEFT PANE (7 of 12 cols): Interactive CAD Blueprint
             ============================================================ */}
-            <div className="lg:col-span-7 rounded-2xl bg-[#0e1424] border border-white/10 p-4 space-y-3 shadow-xl">
+            <div className={`lg:col-span-7 rounded-2xl ${themeConfig.cardBg} border border-white/10 p-4 space-y-3 shadow-xl`}>
               
               {/* CAD Controls Bar */}
               <div className="flex items-center justify-between gap-2">
                 <div className="flex items-center gap-2">
-                  <div className="w-8 h-8 rounded-lg bg-amber-500/15 border border-amber-500/30 text-[#fbbf24] flex items-center justify-center">
+                  <div className={`w-8 h-8 rounded-lg ${themeConfig.accentBadgeBg} flex items-center justify-center`}>
                     <Layers className="w-4 h-4" />
                   </div>
                   <div>
@@ -787,7 +805,7 @@ export const CreateProjectView: React.FC<CreateProjectViewProps> = ({
                   </button>
                   <button
                     onClick={() => setZoomLevel(1)}
-                    className="px-2 py-0.5 text-[11px] text-[#fbbf24] hover:text-white font-mono cursor-pointer"
+                    className={`px-2 py-0.5 text-[11px] ${themeConfig.accentText} hover:text-white font-mono cursor-pointer`}
                   >
                     {Math.round(zoomLevel * 100)}%
                   </button>
@@ -795,15 +813,15 @@ export const CreateProjectView: React.FC<CreateProjectViewProps> = ({
               </div>
 
               {/* CAD Blueprint Stage */}
-              <div className="relative rounded-2xl bg-[#080d18] border border-amber-500/20 h-[400px] sm:h-[450px] overflow-hidden flex items-center justify-center p-3 select-none">
+              <div className={`relative rounded-2xl bg-[#080d18] border ${themeConfig.accentBorder} h-[400px] sm:h-[450px] overflow-hidden flex items-center justify-center p-3 select-none`}>
                 
                 {/* CAD Grid Lines */}
                 <div 
                   className="absolute inset-0 pointer-events-none opacity-15"
                   style={{
                     backgroundImage: `
-                      linear-gradient(to right, #fbbf24 1px, transparent 1px),
-                      linear-gradient(to bottom, #fbbf24 1px, transparent 1px)
+                      linear-gradient(to right, ${themeConfig.cadOuterWall} 1px, transparent 1px),
+                      linear-gradient(to bottom, ${themeConfig.cadOuterWall} 1px, transparent 1px)
                     `,
                     backgroundSize: '24px 24px'
                   }}
@@ -816,24 +834,24 @@ export const CreateProjectView: React.FC<CreateProjectViewProps> = ({
                   style={{ transform: `scale(${zoomLevel})` }}
                 >
                   {/* Outer Walls */}
-                  <rect x="160" y="80" width="580" height="430" fill="#0b101d" stroke="#fbbf24" strokeWidth="2.5" />
+                  <rect x="160" y="80" width="580" height="430" fill="#0b101d" stroke={themeConfig.cadOuterWall} strokeWidth="2.5" />
                   
                   {/* Top Dimensions */}
-                  <g className="text-[#fbbf24]">
-                    <line x1="160" y1="50" x2="740" y2="50" stroke="#fbbf24" strokeWidth="1" />
-                    <line x1="160" y1="42" x2="160" y2="58" stroke="#fbbf24" strokeWidth="1" />
-                    <line x1="740" y1="42" x2="740" y2="58" stroke="#fbbf24" strokeWidth="1" />
-                    <text x="450" y="44" fill="#fbbf24" fontSize="12" fontWeight="bold" textAnchor="middle" fontFamily="monospace">
+                  <g>
+                    <line x1="160" y1="50" x2="740" y2="50" stroke={themeConfig.cadOuterWall} strokeWidth="1" />
+                    <line x1="160" y1="42" x2="160" y2="58" stroke={themeConfig.cadOuterWall} strokeWidth="1" />
+                    <line x1="740" y1="42" x2="740" y2="58" stroke={themeConfig.cadOuterWall} strokeWidth="1" />
+                    <text x="450" y="44" fill={themeConfig.cadLabelText} fontSize="12" fontWeight="bold" textAnchor="middle" fontFamily="monospace">
                       18200 mm
                     </text>
                   </g>
 
                   {/* Left Dimensions */}
-                  <g className="text-[#fbbf24]">
-                    <line x1="135" y1="80" x2="135" y2="510" stroke="#fbbf24" strokeWidth="1" />
-                    <line x1="127" y1="80" x2="143" y2="80" stroke="#fbbf24" strokeWidth="1" />
-                    <line x1="127" y1="510" x2="143" y2="510" stroke="#fbbf24" strokeWidth="1" />
-                    <text x="130" y="295" fill="#fbbf24" fontSize="12" fontWeight="bold" textAnchor="middle" transform="rotate(-90 130 295)" fontFamily="monospace">
+                  <g>
+                    <line x1="135" y1="80" x2="135" y2="510" stroke={themeConfig.cadOuterWall} strokeWidth="1" />
+                    <line x1="127" y1="80" x2="143" y2="80" stroke={themeConfig.cadOuterWall} strokeWidth="1" />
+                    <line x1="127" y1="510" x2="143" y2="510" stroke={themeConfig.cadOuterWall} strokeWidth="1" />
+                    <text x="130" y="295" fill={themeConfig.cadLabelText} fontSize="12" fontWeight="bold" textAnchor="middle" transform="rotate(-90 130 295)" fontFamily="monospace">
                       12600 mm
                     </text>
                   </g>
@@ -850,14 +868,14 @@ export const CreateProjectView: React.FC<CreateProjectViewProps> = ({
                       y="85" 
                       width="190" 
                       height="190" 
-                      fill={selectedRoomId === 'room-01' ? 'rgba(245, 158, 11, 0.45)' : hoveredRoomId === 'room-01' ? 'rgba(245, 158, 11, 0.35)' : 'rgba(245, 158, 11, 0.18)'}
-                      stroke={selectedRoomId === 'room-01' ? '#fbbf24' : '#f59e0b'}
+                      fill={selectedRoomId === 'room-01' ? themeConfig.roomColors.room1.fill : hoveredRoomId === 'room-01' ? themeConfig.roomColors.room1.fill : 'rgba(56, 189, 248, 0.08)'}
+                      stroke={selectedRoomId === 'room-01' ? themeConfig.roomColors.room1.stroke : themeConfig.cadInnerWall}
                       strokeWidth={selectedRoomId === 'room-01' ? '2.5' : '1.5'}
                     />
                     <text x="260" y="165" fill="#ffffff" fontSize="12" fontWeight="bold" textAnchor="middle">
                       OFFICE 01
                     </text>
-                    <text x="260" y="185" fill="#fbbf24" fontSize="11" textAnchor="middle" fontFamily="monospace">
+                    <text x="260" y="185" fill={themeConfig.roomColors.room1.stroke} fontSize="11" textAnchor="middle" fontFamily="monospace">
                       S: 28.5 m² • P: 21.4 m
                     </text>
                     <text x="260" y="202" fill="rgba(255,255,255,0.7)" fontSize="10" textAnchor="middle" fontFamily="monospace">
@@ -877,14 +895,14 @@ export const CreateProjectView: React.FC<CreateProjectViewProps> = ({
                       y="85" 
                       width="195" 
                       height="190" 
-                      fill={selectedRoomId === 'room-02' ? 'rgba(251, 191, 36, 0.45)' : hoveredRoomId === 'room-02' ? 'rgba(251, 191, 36, 0.35)' : 'rgba(251, 191, 36, 0.18)'}
-                      stroke={selectedRoomId === 'room-02' ? '#fbbf24' : '#d97706'}
+                      fill={selectedRoomId === 'room-02' ? themeConfig.roomColors.room2.fill : hoveredRoomId === 'room-02' ? themeConfig.roomColors.room2.fill : 'rgba(14, 165, 233, 0.08)'}
+                      stroke={selectedRoomId === 'room-02' ? themeConfig.roomColors.room2.stroke : themeConfig.cadInnerWall}
                       strokeWidth={selectedRoomId === 'room-02' ? '2.5' : '1.5'}
                     />
                     <text x="457" y="165" fill="#ffffff" fontSize="12" fontWeight="bold" textAnchor="middle">
                       OFFICE 02
                     </text>
-                    <text x="457" y="185" fill="#fbbf24" fontSize="11" textAnchor="middle" fontFamily="monospace">
+                    <text x="457" y="185" fill={themeConfig.roomColors.room2.stroke} fontSize="11" textAnchor="middle" fontFamily="monospace">
                       S: 32.0 m² • P: 22.8 m
                     </text>
                     <text x="457" y="202" fill="rgba(255,255,255,0.7)" fontSize="10" textAnchor="middle" fontFamily="monospace">
@@ -904,14 +922,14 @@ export const CreateProjectView: React.FC<CreateProjectViewProps> = ({
                       y="85" 
                       width="175" 
                       height="190" 
-                      fill={selectedRoomId === 'room-03' ? 'rgba(234, 88, 12, 0.45)' : hoveredRoomId === 'room-03' ? 'rgba(234, 88, 12, 0.35)' : 'rgba(234, 88, 12, 0.18)'}
-                      stroke={selectedRoomId === 'room-03' ? '#fbbf24' : '#ea580c'}
+                      fill={selectedRoomId === 'room-03' ? themeConfig.roomColors.room3.fill : hoveredRoomId === 'room-03' ? themeConfig.roomColors.room3.fill : 'rgba(99, 102, 241, 0.08)'}
+                      stroke={selectedRoomId === 'room-03' ? themeConfig.roomColors.room3.stroke : themeConfig.cadInnerWall}
                       strokeWidth={selectedRoomId === 'room-03' ? '2.5' : '1.5'}
                     />
                     <text x="647" y="165" fill="#ffffff" fontSize="12" fontWeight="bold" textAnchor="middle">
                       MEETING ROOM
                     </text>
-                    <text x="647" y="185" fill="#fbbf24" fontSize="11" textAnchor="middle" fontFamily="monospace">
+                    <text x="647" y="185" fill={themeConfig.roomColors.room3.stroke} fontSize="11" textAnchor="middle" fontFamily="monospace">
                       S: 34.2 m² • P: 23.6 m
                     </text>
                     <text x="647" y="202" fill="rgba(255,255,255,0.7)" fontSize="10" textAnchor="middle" fontFamily="monospace">
@@ -931,8 +949,8 @@ export const CreateProjectView: React.FC<CreateProjectViewProps> = ({
                       y="280" 
                       width="570" 
                       height="80" 
-                      fill={selectedRoomId === 'room-04' ? 'rgba(56, 189, 248, 0.45)' : hoveredRoomId === 'room-04' ? 'rgba(56, 189, 248, 0.35)' : 'rgba(56, 189, 248, 0.18)'}
-                      stroke={selectedRoomId === 'room-04' ? '#38bdf8' : '#0284c7'}
+                      fill={selectedRoomId === 'room-04' ? themeConfig.roomColors.room4.fill : hoveredRoomId === 'room-04' ? themeConfig.roomColors.room4.fill : 'rgba(20, 184, 166, 0.08)'}
+                      stroke={selectedRoomId === 'room-04' ? themeConfig.roomColors.room4.stroke : themeConfig.cadInnerWall}
                       strokeWidth={selectedRoomId === 'room-04' ? '2.5' : '1.5'}
                     />
                     <text x="450" y="325" fill="#ffffff" fontSize="12" fontWeight="bold" textAnchor="middle">
@@ -952,7 +970,7 @@ export const CreateProjectView: React.FC<CreateProjectViewProps> = ({
                       y="365" 
                       width="260" 
                       height="140" 
-                      fill={selectedRoomId === 'room-05' ? 'rgba(168, 85, 247, 0.45)' : hoveredRoomId === 'room-05' ? 'rgba(168, 85, 247, 0.35)' : 'rgba(168, 85, 247, 0.18)'}
+                      fill={selectedRoomId === 'room-05' ? 'rgba(168, 85, 247, 0.35)' : hoveredRoomId === 'room-05' ? 'rgba(168, 85, 247, 0.25)' : 'rgba(168, 85, 247, 0.08)'}
                       stroke={selectedRoomId === 'room-05' ? '#c084fc' : '#a855f7'}
                       strokeWidth={selectedRoomId === 'room-05' ? '2.5' : '1.5'}
                     />
@@ -976,7 +994,7 @@ export const CreateProjectView: React.FC<CreateProjectViewProps> = ({
                       y="365" 
                       width="305" 
                       height="140" 
-                      fill={selectedRoomId === 'room-06' ? 'rgba(16, 185, 129, 0.45)' : hoveredRoomId === 'room-06' ? 'rgba(16, 185, 129, 0.35)' : 'rgba(16, 185, 129, 0.18)'}
+                      fill={selectedRoomId === 'room-06' ? 'rgba(16, 185, 129, 0.35)' : hoveredRoomId === 'room-06' ? 'rgba(16, 185, 129, 0.25)' : 'rgba(16, 185, 129, 0.08)'}
                       stroke={selectedRoomId === 'room-06' ? '#34d399' : '#10b981'}
                       strokeWidth={selectedRoomId === 'room-06' ? '2.5' : '1.5'}
                     />
@@ -1004,7 +1022,7 @@ export const CreateProjectView: React.FC<CreateProjectViewProps> = ({
                     if (onNavigateToReview) onNavigateToReview();
                     else handleProceedToEstimate();
                   }}
-                  className="text-[#fbbf24] hover:underline flex items-center gap-1 cursor-pointer font-medium"
+                  className={`${themeConfig.accentText} hover:underline flex items-center gap-1 cursor-pointer font-medium`}
                 >
                   <span>Mở trung tâm kiểm tra hình học</span>
                   <ExternalLink className="w-3.5 h-3.5" />
@@ -1015,11 +1033,11 @@ export const CreateProjectView: React.FC<CreateProjectViewProps> = ({
             {/* ============================================================
                 RIGHT PANE (5 of 12 cols): Pure Geometric Takeoff Sheet
             ============================================================ */}
-            <div className="lg:col-span-5 rounded-2xl bg-[#0e1424] border border-white/10 p-4 space-y-3.5 shadow-xl">
+            <div className={`lg:col-span-5 rounded-2xl ${themeConfig.cardBg} border border-white/10 p-4 space-y-3.5 shadow-xl`}>
               
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-2">
-                  <div className="w-8 h-8 rounded-lg bg-amber-500/15 border border-amber-500/30 text-[#fbbf24] flex items-center justify-center">
+                  <div className={`w-8 h-8 rounded-lg ${themeConfig.accentBadgeBg} flex items-center justify-center`}>
                     <FileSpreadsheet className="w-4 h-4" />
                   </div>
                   <div>
@@ -1028,7 +1046,7 @@ export const CreateProjectView: React.FC<CreateProjectViewProps> = ({
                   </div>
                 </div>
 
-                <span className="px-2 py-0.5 rounded-full bg-amber-500/15 border border-amber-500/30 text-[#fbbf24] text-[10px] font-mono">
+                <span className={`px-2 py-0.5 rounded-full ${themeConfig.accentBadgeBg} text-[10px] font-mono`}>
                   6 phân khu
                 </span>
               </div>
@@ -1047,11 +1065,12 @@ export const CreateProjectView: React.FC<CreateProjectViewProps> = ({
                       onMouseLeave={() => setHoveredRoomId(null)}
                       className={`p-3 rounded-xl border transition-all cursor-pointer ${
                         isSelected 
-                          ? 'bg-amber-500/15 border-amber-500/60 shadow-[0_0_12px_rgba(245,158,11,0.15)]' 
+                          ? `${themeConfig.accentBorder} shadow-sm` 
                           : isHovered 
-                          ? 'bg-[#161a26] border-white/20'
+                          ? 'bg-white/5 border-white/20'
                           : 'bg-[#080d18] border-white/10 hover:border-white/20'
                       }`}
+                      style={isSelected ? { backgroundColor: `${themeConfig.iconColor}15` } : undefined}
                     >
                       <div className="flex items-center justify-between mb-1">
                         <div className="flex items-center gap-2">
@@ -1094,16 +1113,16 @@ export const CreateProjectView: React.FC<CreateProjectViewProps> = ({
               </div>
 
               {/* Bottom Grand Summary Card (Pure Takeoff Data) */}
-              <div className="p-3.5 rounded-xl bg-gradient-to-tr from-[#161a26] to-[#0e1424] border border-amber-500/30 space-y-2 shadow-sm">
+              <div className={`p-3.5 rounded-xl ${themeConfig.cardBg} border ${themeConfig.accentBorder} space-y-2 shadow-sm`}>
                 <div className="flex justify-between items-center text-xs">
                   <span className="text-white/70">Tổng diện tích tường net (sau trừ cửa):</span>
-                  <span className="font-bold text-[#fbbf24] font-mono text-sm">
+                  <span className={`font-bold ${themeConfig.accentText} font-mono text-sm`}>
                     {totalNetWallArea.toFixed(1)} m²
                   </span>
                 </div>
                 <div className="flex justify-between items-center text-xs">
                   <span className="text-white/70">Tổng diện tích trần (nếu bóc tách):</span>
-                  <span className="font-bold text-amber-200/90 font-mono text-sm">
+                  <span className="font-bold text-white/80 font-mono text-sm">
                     {totalCeilingArea.toFixed(1)} m²
                   </span>
                 </div>

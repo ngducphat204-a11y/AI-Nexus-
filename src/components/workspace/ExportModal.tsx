@@ -39,7 +39,7 @@ export const ExportModal: React.FC<ExportModalProps> = ({
         <div className="px-6 py-4 border-b border-white/10 flex items-center justify-between bg-[#161822]">
           <div>
             <h2 className="text-base font-bold text-white flex items-center gap-2">
-              <Download className="w-4 h-4 text-[#ffc474]" />
+              <Download className="w-4 h-4 text-sky-400" />
               Xuất Hồ sơ Bóc tách & Bản vẽ CAD Đã Kiểm Định
             </h2>
             <p className="text-xs text-white/50 font-mono">
@@ -103,7 +103,7 @@ export const ExportModal: React.FC<ExportModalProps> = ({
               desc: 'Toàn văn nhật ký kiểm toán toán học phục vụ đơn vị thẩm tra độc lập',
               ext: 'Audit_Verification_Cert.json',
               icon: FileText,
-              color: 'text-amber-400',
+              color: 'text-sky-400',
             },
           ].map((item) => {
             const Icon = item.icon;
@@ -113,14 +113,14 @@ export const ExportModal: React.FC<ExportModalProps> = ({
               <div
                 key={item.id}
                 onClick={() => handleExport(item.id, item.ext)}
-                className="p-3.5 rounded-xl border border-white/10 hover:border-[#ffc474]/50 bg-[#161822] hover:bg-white/5 transition-all cursor-pointer flex items-center justify-between group shadow-sm"
+                className="p-3.5 rounded-xl border border-white/10 hover:border-sky-500/40 bg-[#161822] hover:bg-white/5 transition-all cursor-pointer flex items-center justify-between group shadow-sm"
               >
                 <div className="flex items-start gap-3">
                   <div className="p-2 rounded-lg bg-white/5 group-hover:bg-white/10 transition-colors shrink-0 mt-0.5">
                     <Icon className={`w-4 h-4 ${item.color}`} />
                   </div>
                   <div>
-                    <div className="text-xs font-bold text-white group-hover:text-[#ffc474] transition-colors">
+                    <div className="text-xs font-bold text-white group-hover:text-sky-400 transition-colors">
                       {item.name}
                     </div>
                     <div className="text-[11px] text-white/50 font-sans mt-0.5">
@@ -131,9 +131,9 @@ export const ExportModal: React.FC<ExportModalProps> = ({
 
                 <div className="shrink-0 pl-3">
                   {isCurrent ? (
-                    <Loader2 className="w-4 h-4 text-[#ffc474] animate-spin" />
+                    <Loader2 className="w-4 h-4 text-sky-400 animate-spin" />
                   ) : (
-                    <Download className="w-4 h-4 text-white/40 group-hover:text-[#ffc474] transition-colors" />
+                    <Download className="w-4 h-4 text-white/40 group-hover:text-sky-400 transition-colors" />
                   )}
                 </div>
               </div>
@@ -144,12 +144,12 @@ export const ExportModal: React.FC<ExportModalProps> = ({
         {/* Footer Summary */}
         <div className="px-6 py-4 border-t border-white/10 bg-[#161822] flex items-center justify-between text-xs font-mono text-white/50">
           <div>
-            Tổng bóc tách: <strong className="text-[#ffc474]">{totalPaintArea.toLocaleString()} m²</strong> ·{' '}
+            Tổng bóc tách: <strong className="text-sky-400">{totalPaintArea.toLocaleString()} m²</strong> ·{' '}
             <strong className="text-emerald-400">{totalCost.toLocaleString()} ₫</strong>
           </div>
           <button
             onClick={onClose}
-            className="px-4 py-1.5 rounded-lg border border-white/15 bg-white/5 hover:bg-white/10 text-white font-medium transition-colors cursor-pointer"
+            className="px-4 py-1.5 rounded-lg border border-white/15 bg-white/5 hover:bg-sky-500/20 hover:border-sky-500/30 text-white font-medium transition-colors cursor-pointer"
           >
             Hoàn tất
           </button>

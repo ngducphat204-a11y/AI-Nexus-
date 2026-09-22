@@ -109,3 +109,6 @@ export interface EstimateVersion {
   totalCost: number;
   status: 'Draft' | 'In Review' | 'Approved';
 }
+
+export type WorkspaceTheme = 'steel-blue' | 'sage-green' | 'muted-sand';
+

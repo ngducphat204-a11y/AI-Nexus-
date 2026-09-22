@@ -43,7 +43,7 @@ export const LandingStorytelling: React.FC<LandingStorytellingProps> = ({
       <section className="py-20 md:py-28 border-b border-white/10 bg-[#0e1015] relative">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div {...fadeInUp} className="max-w-3xl mb-14">
-            <span className="text-xs font-mono font-bold uppercase tracking-[0.2em] text-[#ffc474] bg-amber-500/10 px-3 py-1 rounded-full border border-amber-500/30">
+            <span className="text-xs font-mono font-bold uppercase tracking-[0.2em] text-[#38bdf8] bg-sky-500/10 px-3 py-1 rounded-full border border-sky-500/30">
               01 // Bản chất Kỹ thuật
             </span>
             <h2 className="font-serif-cormorant text-3xl sm:text-5xl font-semibold text-white tracking-tight mt-4 leading-[1.15]">
@@ -147,7 +147,7 @@ export const LandingStorytelling: React.FC<LandingStorytellingProps> = ({
       <section id="detection" className="py-20 md:py-28 border-b border-white/10 bg-[#12141a] relative">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div {...fadeInUp} className="max-w-3xl mb-14">
-            <span className="text-xs font-mono font-bold uppercase tracking-[0.2em] text-[#ffc474] bg-amber-500/10 px-3 py-1 rounded-full border border-amber-500/30">
+            <span className="text-xs font-mono font-bold uppercase tracking-[0.2em] text-[#38bdf8] bg-sky-500/10 px-3 py-1 rounded-full border border-sky-500/30">
               02 // Kiến trúc Pipeline Bóc tách
             </span>
             <h2 className="font-serif-cormorant text-3xl sm:text-5xl font-semibold text-white tracking-tight mt-4 leading-[1.15]">
@@ -195,14 +195,14 @@ export const LandingStorytelling: React.FC<LandingStorytellingProps> = ({
                 step: '06',
                 title: 'Đánh giá & Thẩm định',
                 desc: 'Chấm điểm tin cậy & đưa vào hàng đợi',
-                badgeBg: 'bg-amber-500/20 text-[#ffc474] border-amber-500/40 font-bold',
+                badgeBg: 'bg-sky-500/20 text-[#38bdf8] border-sky-500/40 font-bold',
               },
             ].map((p, idx) => (
               <motion.div
                 key={p.step}
                 {...fadeInUp}
                 transition={{ duration: 0.5, delay: idx * 0.08 }}
-                className="dense-panel p-5 rounded-xl border border-white/10 bg-[#161822] hover:border-amber-400/40 transition-all flex flex-col justify-between"
+                className="dense-panel p-5 rounded-xl border border-white/10 bg-[#161822] hover:border-sky-400/40 transition-all flex flex-col justify-between"
               >
                 <div>
                   <span className={`text-[11px] font-mono font-bold px-2 py-0.5 rounded border inline-block ${p.badgeBg}`}>
@@ -263,7 +263,7 @@ export const LandingStorytelling: React.FC<LandingStorytellingProps> = ({
       <section className="py-20 md:py-28 border-b border-white/10 bg-[#0c0e12] relative">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div {...fadeInUp} className="max-w-3xl mb-14">
-            <span className="text-xs font-mono font-bold uppercase tracking-[0.2em] text-[#ffc474] bg-amber-500/10 px-3 py-1 rounded-full border border-amber-500/30">
+            <span className="text-xs font-mono font-bold uppercase tracking-[0.2em] text-[#38bdf8] bg-sky-500/10 px-3 py-1 rounded-full border border-sky-500/30">
               03 // Cơ chế Thẩm định Kỹ thuật (Human-In-The-Loop)
             </span>
             <h2 className="font-serif-cormorant text-3xl sm:text-5xl font-semibold text-white tracking-tight mt-4 leading-[1.15]">
@@ -375,7 +375,7 @@ export const LandingStorytelling: React.FC<LandingStorytellingProps> = ({
 
               <div className="text-xs font-mono text-white/50">
                 Trạng thái:{' '}
-                <span className="text-[#ffc474] font-bold capitalize">
+                <span className="text-[#38bdf8] font-bold capitalize">
                   {selectedReviewAction === 'confirm'
                     ? 'Đã chọn Phê duyệt'
                     : selectedReviewAction === 'correct'
@@ -394,7 +394,7 @@ export const LandingStorytelling: React.FC<LandingStorytellingProps> = ({
       <section id="traceability" className="py-20 md:py-28 border-b border-white/10 bg-[#0e1015] text-white relative">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div {...fadeInUp} className="max-w-3xl mb-14">
-            <span className="text-xs font-mono font-bold uppercase tracking-[0.2em] text-[#ffc474] bg-amber-500/10 px-3 py-1 rounded-full border border-amber-500/30">
+            <span className="text-xs font-mono font-bold uppercase tracking-[0.2em] text-[#38bdf8] bg-sky-500/10 px-3 py-1 rounded-full border border-sky-500/30">
               04 // Tính năng Kỹ thuật Độc bản
             </span>
             <h2 className="font-serif-cormorant text-3xl sm:text-5xl font-semibold text-white tracking-tight mt-4 leading-[1.15]">
@@ -453,16 +453,16 @@ export const LandingStorytelling: React.FC<LandingStorytellingProps> = ({
                     onClick={() => setActiveTraceStep(step.id)}
                     className={`p-4 rounded-xl border transition-all cursor-pointer ${
                       isActive
-                        ? 'bg-amber-500/15 border-amber-400/50 shadow-lg translate-x-1.5'
+                        ? 'bg-sky-500/15 border-sky-400/50 shadow-lg shadow-sky-500/10 translate-x-1.5'
                         : 'dense-panel border-white/10 bg-[#161822] hover:border-white/20'
                     }`}
                   >
                     <div className="flex items-center justify-between text-xs font-mono mb-1">
-                      <span className={isActive ? 'text-[#ffc474] font-bold' : 'text-white/60'}>
+                      <span className={isActive ? 'text-[#38bdf8] font-bold' : 'text-white/60'}>
                         {step.title}
                       </span>
                       <span className={`text-[10px] px-2 py-0.5 rounded ${
-                        isActive ? 'bg-amber-500/25 text-[#ffc474] font-semibold border border-amber-500/40' : 'bg-white/10 text-white/60'
+                        isActive ? 'bg-sky-500/25 text-[#38bdf8] font-semibold border border-sky-500/40' : 'bg-white/10 text-white/60'
                       }`}>
                         {step.tag}
                       </span>
@@ -480,15 +480,15 @@ export const LandingStorytelling: React.FC<LandingStorytellingProps> = ({
               className="lg:col-span-6 bg-[#161822] border border-white/10 rounded-2xl p-6 shadow-2xl relative"
             >
               <div className="flex items-center justify-between pb-3 border-b border-white/10 text-xs font-mono text-white/50">
-                <span className="text-[#ffc474] flex items-center gap-1.5 font-bold">
-                  <GitBranch className="w-4 h-4 text-[#ffc474]" />
+                <span className="text-[#38bdf8] flex items-center gap-1.5 font-bold">
+                  <GitBranch className="w-4 h-4 text-[#38bdf8]" />
                   BẢNG TRA CỨU TRUY XUẤT NGUỒN GỐC HAI CHIỀU
                 </span>
                 <span className="text-white/40 font-bold">Bước {activeTraceStep} / 5</span>
               </div>
 
               <div className="my-6 p-6 rounded-xl bg-[#12141a] border border-white/10 font-mono text-xs space-y-4">
-                <div className="text-[#ffc474] text-[11px] uppercase tracking-wider font-bold">
+                <div className="text-[#38bdf8] text-[11px] uppercase tracking-wider font-bold">
                   BỐI CẢNH TRUY XUẤT ĐANG KÍCH HOẠT
                 </div>
 
@@ -512,7 +512,7 @@ export const LandingStorytelling: React.FC<LandingStorytellingProps> = ({
 
                 {activeTraceStep === 3 && (
                   <div className="space-y-2">
-                    <div className="text-lg font-bold text-[#ffc474]">14 Đỉnh trên Lớp A-WALL</div>
+                    <div className="text-lg font-bold text-[#38bdf8]">14 Đỉnh trên Lớp A-WALL</div>
                     <p className="text-white/70 text-xs font-sans font-light">
                       Vòng khép kín chuẩn xác. Chu vi được xác thực ở mức 26.50 mét dài. Bề dày vách tường 200mm đã được tính toán khấu trừ tim trục.
                     </p>
@@ -552,7 +552,7 @@ export const LandingStorytelling: React.FC<LandingStorytellingProps> = ({
                 </button>
                 <button
                   onClick={() => setActiveTraceStep((prev) => (prev < 5 ? prev + 1 : 1))}
-                  className="amber-button px-3.5 py-1.5 text-xs font-semibold cursor-pointer"
+                  className="tech-blue-button px-3.5 py-1.5 text-xs font-semibold cursor-pointer"
                 >
                   Bước tiếp theo →
                 </button>
@@ -568,7 +568,7 @@ export const LandingStorytelling: React.FC<LandingStorytellingProps> = ({
       <section id="estimate" className="py-20 md:py-28 border-b border-white/10 bg-[#12141a] relative">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div {...fadeInUp} className="max-w-3xl mb-14">
-            <span className="text-xs font-mono font-bold uppercase tracking-[0.2em] text-[#ffc474] bg-amber-500/10 px-3 py-1 rounded-full border border-amber-500/30">
+            <span className="text-xs font-mono font-bold uppercase tracking-[0.2em] text-[#38bdf8] bg-sky-500/10 px-3 py-1 rounded-full border border-sky-500/30">
               05 // Khối lượng & Hồ sơ Dự toán
             </span>
             <h2 className="font-serif-cormorant text-3xl sm:text-5xl font-semibold text-white tracking-tight mt-4 leading-[1.15]">
@@ -589,10 +589,10 @@ export const LandingStorytelling: React.FC<LandingStorytellingProps> = ({
               <div className="text-xs text-emerald-400 font-medium mt-2">28 Tầng · Tháp căn hộ A</div>
             </motion.div>
 
-            <motion.div {...fadeInUp} className="dense-panel p-6 rounded-2xl border border-amber-500/30 bg-amber-500/10">
-              <div className="text-xs font-mono font-semibold text-[#ffc474]">TỔNG DỰ TOÁN KINH PHÍ</div>
-              <div className="text-3xl font-extrabold text-[#ffc474] font-mono mt-2">
-                1,284,500,000 <span className="text-sm font-normal text-[#ffc474]/70">₫</span>
+            <motion.div {...fadeInUp} className="dense-panel p-6 rounded-2xl border border-sky-500/30 bg-sky-500/10">
+              <div className="text-xs font-mono font-semibold text-[#38bdf8]">TỔNG DỰ TOÁN KINH PHÍ</div>
+              <div className="text-3xl font-extrabold text-[#38bdf8] font-mono mt-2">
+                1,284,500,000 <span className="text-sm font-normal text-[#38bdf8]/70">₫</span>
               </div>
               <div className="text-xs text-white/70 mt-2 font-medium">Bao gồm Vật tư + Nhân công</div>
             </motion.div>
@@ -618,7 +618,7 @@ export const LandingStorytelling: React.FC<LandingStorytellingProps> = ({
           <motion.div {...fadeInUp} className="border border-white/10 rounded-2xl overflow-hidden shadow-2xl bg-[#161822]">
             <div className="px-6 py-4 bg-[#1c1f2b] border-b border-white/10 flex items-center justify-between">
               <div className="flex items-center gap-2">
-                <Table2 className="w-4 h-4 text-[#ffc474]" />
+                <Table2 className="w-4 h-4 text-[#38bdf8]" />
                 <span className="text-xs font-mono font-bold text-white">
                   TÒA THÁP SUNRISE TOWER // BẢNG BÓC TÁCH KHỐI LƯỢNG SƠN TẦNG 03
                 </span>
@@ -696,8 +696,8 @@ export const LandingStorytelling: React.FC<LandingStorytellingProps> = ({
           PHẦN 6: KÊU GỌI HÀNH ĐỘNG KỸ THUẬT (CALL TO ACTION)
       ───────────────────────────────────────────────────────────── */}
       <section className="py-24 md:py-32 bg-[#090b0e] text-white text-center relative overflow-hidden border-t border-white/10">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_30%,rgba(255,193,102,0.14),transparent_70%)] pointer-events-none" />
-        <div className="absolute left-[20%] top-[40%] h-[24rem] w-[24rem] rounded-full bg-[radial-gradient(circle,rgba(16,185,129,0.06),transparent_70%)] blur-3xl pointer-events-none" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_30%,rgba(14,165,233,0.18),transparent_70%)] pointer-events-none" />
+        <div className="absolute left-[20%] top-[40%] h-[24rem] w-[24rem] rounded-full bg-[radial-gradient(circle,rgba(56,189,248,0.08),transparent_70%)] blur-3xl pointer-events-none" />
 
         <motion.div {...fadeInUp} className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <h2 className="font-serif-cormorant text-4xl sm:text-5xl lg:text-6xl font-semibold text-white tracking-tight leading-[1.1]">
@@ -710,7 +710,7 @@ export const LandingStorytelling: React.FC<LandingStorytellingProps> = ({
           <div className="mt-10 flex flex-wrap items-center justify-center gap-4">
             <button
               onClick={onGetStarted}
-              className="amber-button inline-flex items-center gap-2 px-8 py-4 text-sm font-semibold cursor-pointer"
+              className="tech-blue-button inline-flex items-center gap-2 px-8 py-4 text-sm font-semibold cursor-pointer"
             >
               <span>Bắt đầu bóc tách ngay</span>
               <ArrowRight className="w-4 h-4" />
@@ -719,7 +719,7 @@ export const LandingStorytelling: React.FC<LandingStorytellingProps> = ({
               onClick={onExploreDemo}
               className="dense-panel inline-flex items-center gap-2 px-7 py-4 text-sm font-medium text-white hover:bg-white/10 rounded-2xl transition-all cursor-pointer"
             >
-              <Compass className="w-4 h-4 text-[#ffc474]" />
+              <Compass className="w-4 h-4 text-[#38bdf8]" />
               <span>Khám phá dự án mẫu</span>
               <ChevronRight className="w-4 h-4 text-white/40" />
             </button>
